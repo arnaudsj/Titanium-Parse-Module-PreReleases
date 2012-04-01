@@ -169,6 +169,14 @@ pre code {
 <li><a href="#deleteobject">deleteObject()</a></li>
 <li><a href="#deleteobjectinbackground-map">deleteObjectInBackground( Map )</a></li>
 <li><a href="#incrementkey-map">incrementKey( Map )</a></li>
+<li><a href="#fetch">fetch()</a></li>
+<li><a href="#fetchinbackground-map">fetchInBackground( Map )</a></li>
+<li><a href="#fetchifneeded">fetchIfNeeded()</a></li>
+<li><a href="#fetchifneededinbackground-map">fetchIfNeededInBackground( Map )</a></li>
+<li><a href="#saveeventually">saveEventually()</a></li>
+<li><a href="#deleteeventually">deleteEventually()</a></li>
+<li><a href="#isdataavailable">isDataAvailable()</a></li>
+<li><a href="#allkeys">allKeys()</a></li>
 </ul>
 </li>
 <li><a href="#properties">Properties</a><ul>
@@ -226,30 +234,7 @@ pre code {
 <p>data: JSONTypes or PFTypes</p>
 <hr />
 <h3 id="objectforkeyinbackground-map">objectForKeyInBackground( Map )</h3>
-<p><strong>Arguments:</strong></p>
-<p>Map:</p>
-<pre><code>{
-    key: String
-    success: Callback
-    error: Callback
-}
-</code></pre>
-<p><strong>Callbacks:</strong></p>
-<p>success:
-    event: Map</p>
-<pre><code>{
-    object: JSONTypes or PFTypes
-}
-</code></pre>
-<p>error:
-    event: Map</p>
-<pre><code>{
-    errorCode: Number
-    error: String
-}
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>void</p>
+<p><strong>/*DEPRECATED*/</strong></p>
 <hr />
 <h3 id="setobject-data-key">setObject( data, key )</h3>
 <p><strong>Arguments:</strong></p>
@@ -379,6 +364,107 @@ pre code {
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>void</p>
+<hr />
+<h3 id="fetch">fetch()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="fetchinbackground-map">fetchInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    object: PFObject // The fetched object
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="fetchifneeded">fetchIfNeeded()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="fetchifneededinbackground-map">fetchIfNeededInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    object: PFObject // The fetched object
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="saveeventually">saveEventually()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="deleteeventually">deleteEventually()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="isdataavailable">isDataAvailable()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="allkeys">allKeys()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Array of Strings</p>
+<hr />
 <hr />
 <hr />
 <h2 id="properties">Properties</h2>

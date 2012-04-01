@@ -109,38 +109,9 @@ data: JSONTypes or PFTypes
 
 _____
 
-###objectForKeyInBackground( Map )
+###objectForKeyInBackground( Map ) 
 
-__Arguments:__
-
-Map:
-	
-	{
-		key: String
-		success: Callback
-		error: Callback
-	}
-
-__Callbacks:__
-
-success:
-	event: Map
-	
-	{
-		object: JSONTypes or PFTypes
-	}
-
-error:
-	event: Map
-	
-	{
-		errorCode: Number
-		error: String
-	}
-
-__Returns:__
-	
-void
+__/\*DEPRECATED\*/__
 
 ____
 
@@ -332,6 +303,161 @@ Map:
 __Returns:__
 	
 void
+
+_____
+
+###fetch()
+
+__Arguments:__
+
+void
+
+__Returns:__
+	
+Map:	
+	
+	{
+		succeeded: Boolean
+		errorCode: Number
+		error: String
+	}
+
+_____
+
+###fetchInBackground( Map )
+
+__Arguments:__
+
+Map:
+	
+	{
+		success: Callback
+		error: Callback
+	}
+
+__Callbacks:__
+
+success:
+	event: Map
+	
+	{
+		object: PFObject // The fetched object
+	}
+
+error:
+	event: Map
+	
+	{
+		errorCode: Number
+		error: String
+	}
+
+__Returns:__
+	
+void
+
+_____
+
+###fetchIfNeeded()
+
+__Arguments:__
+
+void
+
+__Returns:__
+	
+Map:	
+	
+	{
+		succeeded: Boolean
+		errorCode: Number
+		error: String
+	}
+
+_____
+
+###fetchIfNeededInBackground( Map )
+
+__Arguments:__
+
+Map:
+	
+	{
+		success: Callback
+		error: Callback
+	}
+
+__Callbacks:__
+
+success:
+	event: Map
+	
+	{
+		object: PFObject // The fetched object
+	}
+
+error:
+	event: Map
+	
+	{
+		errorCode: Number
+		error: String
+	}
+
+__Returns:__
+	
+void
+
+_____
+
+###saveEventually()
+
+__Arguments:__
+
+void
+
+__Returns:__
+	
+void
+
+_____
+
+###deleteEventually()
+
+__Arguments:__
+
+void
+
+__Returns:__
+	
+void
+
+_____
+
+###isDataAvailable()
+
+__Arguments:__
+
+void
+
+__Returns:__
+	
+Boolean
+
+_____
+
+###allKeys()
+
+__Arguments:__
+
+void
+
+__Returns:__
+	
+Array of Strings
+
+
+_____
 
 ____
 ____

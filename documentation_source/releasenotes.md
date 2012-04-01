@@ -40,12 +40,12 @@ ____
 
 ##Versions
 
-###Titanium iOS Module Version: 2.0.2
+###Titanium iOS Module Version: 3.0
 ###Titanium Android Module Version: 2.0.1
 
 ____
 
-###Current Parse iOS API Version: 0.4.14
+###Current Parse iOS API Version: 1.0.2
 ###Current Parse Android API Version: 0.4.32
 
 ____
@@ -77,6 +77,16 @@ __Version 1.0__
 ____
 
 ##iOS Release Notes
+
+__Version 3.0__
+
+- Parse is now out of beta
+- Upgraded to module version 1.0
+
+PFObject
+
+- added: `saveEventually`, `deleteEventually`, `fetch`, `fetchInBackground`, `fetchIfNeeded`, `fetchIfNeededInBackground`, `isDataAvailable`, `allKeys` 
+- removed/deprecated: `objectForKeyInBackground`
 
 __Version 2.0.2__
 

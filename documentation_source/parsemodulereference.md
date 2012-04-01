@@ -1458,19 +1458,19 @@ Code: Description
 
 ____
 
-###kParseErrorUsernameMissingError
+###kParseErrorUsernameMissing
 
 200: Username is missing or empty 
 
-###kParseErrorUserPasswordMissingError
+###kParseErrorUserPasswordMissing
 
 201: Password is missing or empty 
 
-###kParseErrorUsernameTakenError
+###kParseErrorUsernameTaken
 
 202: Username has already been taken 
 
-###kParseErrorUserEmailTakenError
+###kParseErrorUserEmailTaken	
 
 203: Email has already been taken
 
@@ -1490,21 +1490,21 @@ ____
 
 207: Users can only be created through sign up
 
-###kParseErrorFacebookAccountAlreadyLinked
+###kParseErrorAccountAlreadyLinked
 
-208: An existing Facebook account already linked to another user.
+208: An existing account already linked to another user.
 
 ###kParseErrorUserIdMismatch
 
 209: User ID mismatch
 
-###kParseErrorFacebookIdMissing
+###kParseErrorLinkedIdMissing
 
-250: Facebook id missing from request 
+250: Linked id missing from request 
 
-###kParseErrorFacebookInvalidSession
+###kParseErrorInvalidLinkedSession
 
-251: Invalid Facebook session 
+251: Invalid Linked session 
 
 ____
 ##Custom Error Constants (Not From Parse API)

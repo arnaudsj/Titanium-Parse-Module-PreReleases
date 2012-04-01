@@ -347,18 +347,18 @@ pre code {
 <li><a href="#kparseerrorinvalidacl">kParseErrorInvalidACL</a></li>
 <li><a href="#kparseerrortimeout">kParseErrorTimeout</a></li>
 <li><a href="#kparseerrorinvalidemailaddress">kParseErrorInvalidEmailAddress</a></li>
-<li><a href="#kparseerrorusernamemissingerror">kParseErrorUsernameMissingError</a></li>
-<li><a href="#kparseerroruserpasswordmissingerror">kParseErrorUserPasswordMissingError</a></li>
-<li><a href="#kparseerrorusernametakenerror">kParseErrorUsernameTakenError</a></li>
-<li><a href="#kparseerroruseremailtakenerror">kParseErrorUserEmailTakenError</a></li>
+<li><a href="#kparseerrorusernamemissing">kParseErrorUsernameMissing</a></li>
+<li><a href="#kparseerroruserpasswordmissing">kParseErrorUserPasswordMissing</a></li>
+<li><a href="#kparseerrorusernametaken">kParseErrorUsernameTaken</a></li>
+<li><a href="#kparseerroruseremailtaken">kParseErrorUserEmailTaken</a></li>
 <li><a href="#kparseerroruseremailmissing">kParseErrorUserEmailMissing</a></li>
 <li><a href="#kparseerroruserwithemailnotfound">kParseErrorUserWithEmailNotFound</a></li>
 <li><a href="#kparseerrorusercannotbealteredwithoutsession">kParseErrorUserCannotBeAlteredWithoutSession</a></li>
 <li><a href="#kparseerrorusercanonlybecreatedthroughsignup">kParseErrorUserCanOnlyBeCreatedThroughSignUp</a></li>
-<li><a href="#kparseerrorfacebookaccountalreadylinked">kParseErrorFacebookAccountAlreadyLinked</a></li>
+<li><a href="#kparseerroraccountalreadylinked">kParseErrorAccountAlreadyLinked</a></li>
 <li><a href="#kparseerroruseridmismatch">kParseErrorUserIdMismatch</a></li>
-<li><a href="#kparseerrorfacebookidmissing">kParseErrorFacebookIdMissing</a></li>
-<li><a href="#kparseerrorfacebookinvalidsession">kParseErrorFacebookInvalidSession</a></li>
+<li><a href="#kparseerrorlinkedidmissing">kParseErrorLinkedIdMissing</a></li>
+<li><a href="#kparseerrorinvalidlinkedsession">kParseErrorInvalidLinkedSession</a></li>
 </ul>
 </li>
 <li><a href="#custom-error-constants-not-from-parse-api">Custom Error Constants (Not From Parse API)</a><ul>
@@ -1256,13 +1256,13 @@ defaultCallback: Callback</p>
 <h3 id="kparseerrorinvalidemailaddress">kParseErrorInvalidEmailAddress</h3>
 <p>125: The email address was invalid.</p>
 <hr />
-<h3 id="kparseerrorusernamemissingerror">kParseErrorUsernameMissingError</h3>
+<h3 id="kparseerrorusernamemissing">kParseErrorUsernameMissing</h3>
 <p>200: Username is missing or empty </p>
-<h3 id="kparseerroruserpasswordmissingerror">kParseErrorUserPasswordMissingError</h3>
+<h3 id="kparseerroruserpasswordmissing">kParseErrorUserPasswordMissing</h3>
 <p>201: Password is missing or empty </p>
-<h3 id="kparseerrorusernametakenerror">kParseErrorUsernameTakenError</h3>
+<h3 id="kparseerrorusernametaken">kParseErrorUsernameTaken</h3>
 <p>202: Username has already been taken </p>
-<h3 id="kparseerroruseremailtakenerror">kParseErrorUserEmailTakenError</h3>
+<h3 id="kparseerroruseremailtaken">kParseErrorUserEmailTaken</h3>
 <p>203: Email has already been taken</p>
 <h3 id="kparseerroruseremailmissing">kParseErrorUserEmailMissing</h3>
 <p>204: The email is missing, and must be specified</p>
@@ -1272,14 +1272,14 @@ defaultCallback: Callback</p>
 <p>206: The user cannot be altered by a client without the session. </p>
 <h3 id="kparseerrorusercanonlybecreatedthroughsignup">kParseErrorUserCanOnlyBeCreatedThroughSignUp</h3>
 <p>207: Users can only be created through sign up</p>
-<h3 id="kparseerrorfacebookaccountalreadylinked">kParseErrorFacebookAccountAlreadyLinked</h3>
-<p>208: An existing Facebook account already linked to another user.</p>
+<h3 id="kparseerroraccountalreadylinked">kParseErrorAccountAlreadyLinked</h3>
+<p>208: An existing account already linked to another user.</p>
 <h3 id="kparseerroruseridmismatch">kParseErrorUserIdMismatch</h3>
 <p>209: User ID mismatch</p>
-<h3 id="kparseerrorfacebookidmissing">kParseErrorFacebookIdMissing</h3>
-<p>250: Facebook id missing from request </p>
-<h3 id="kparseerrorfacebookinvalidsession">kParseErrorFacebookInvalidSession</h3>
-<p>251: Invalid Facebook session </p>
+<h3 id="kparseerrorlinkedidmissing">kParseErrorLinkedIdMissing</h3>
+<p>250: Linked id missing from request </p>
+<h3 id="kparseerrorinvalidlinkedsession">kParseErrorInvalidLinkedSession</h3>
+<p>251: Invalid Linked session </p>
 <hr />
 <h2 id="custom-error-constants-not-from-parse-api">Custom Error Constants (Not From Parse API)</h2>
 <h3 id="kparseerroruserwrongcredentials">kParseErrorUserWrongCredentials</h3>
