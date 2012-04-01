@@ -1,0 +1,1348 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    margin: 10px 13px 10px 13px;
+}
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre !important;
+	word-wrap: normal !important;
+	overflow-x: auto !important;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+@media screen and (min-width: 768px) {
+    body {
+        width: 748px;
+        margin:10px auto;
+    }
+}
+</style>
+<title>index.html</title>
+</head>
+<body>
+
+<h1 id="parse-api-module-reference">Parse API Module Reference</h1>
+<p><em>Please rate both the iOS and Android module in the marketplace if you find them useful :)</em></p>
+<p><a href="./releasenotes.html">Click here to see version and release notes</a></p>
+<p><a href="./index.html">&lt;- Go Back to Parse Module Guide</a></p>
+<hr />
+<hr />
+<h2 id="extra-reference">Extra Reference</h2>
+<p>This guide contains examples and everything you need to know to start using the parse api module. </p>
+<p>The following reference files list all the functions, arguments, and return values for the Parse Module.</p>
+<p><a href="./index.html">Parse Module Guide</a></p>
+<p><a href="./parsemodulereference.html">Parse Module Reference</a></p>
+<p><a href="./pfobjectreference.html">PFObject Reference</a></p>
+<p><a href="./pfqueryreference.html">PFQuery Reference</a></p>
+<p><a href="./pfuserreference.html">PFUser Reference</a></p>
+<p><a href="./pffilereference.html">PFFile Reference</a></p>
+<p><a href="./pfgeopointreference.html">PFGeoPoint Reference</a></p>
+<p><a href="./pfaclreference.html">PFACL Reference</a></p>
+<hr />
+<hr />
+<h2 id="table-of-contents">Table Of Contents</h2>
+<div class="toc">
+<ul>
+<li><a href="#parse-api-module-reference">Parse API Module Reference</a><ul>
+<li><a href="#extra-reference">Extra Reference</a></li>
+<li><a href="#table-of-contents">Table Of Contents</a></li>
+</ul>
+</li>
+<li><a href="#parse-module-reference">Parse Module Reference</a><ul>
+<li><a href="#types">Types:</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#initparse-map">initParse( Map )</a></li>
+<li><a href="#enableparsemoduledebuglog-enable">enableParseModuleDebugLog( enable )</a></li>
+<li><a href="#createpfobject">createPFObject()</a></li>
+<li><a href="#createpffile">createPFFile()</a></li>
+<li><a href="#createpfquery">createPFQuery()</a></li>
+<li><a href="#createpfuser">createPFUser()</a></li>
+<li><a href="#pfusercurrentuser">PFUserCurrentUser()</a></li>
+<li><a href="#pfuserlogin-map">PFUserLogin( Map )</a></li>
+<li><a href="#pfuserlogininbackground-map">PFUserLoginInBackground( Map )</a></li>
+<li><a href="#pfuserlogout">PFUserLogout()</a></li>
+<li><a href="#pfuserrequestpasswordresetforemail-email">PFUserRequestPasswordResetForEmail( email )</a></li>
+<li><a href="#pfuserrequestpasswordresetforemailinbackground-map">PFUserRequestPasswordResetForEmailInBackground( Map )</a></li>
+<li><a href="#pfuserloginwithfacebookinbackground-map">PFUserLoginWithFacebookInBackground( Map )</a><ul>
+<li><a href="#ios-only">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#pfquerycreateuserobjectwithid-id">PFQueryCreateUserObjectWithId( id )</a></li>
+<li><a href="#pfquerycreatequeryforuser">PFQueryCreateQueryForUser()</a></li>
+<li><a href="#pfquerycreatequerywithclassname-classname">PFQueryCreateQueryWithClassName( className )</a></li>
+<li><a href="#pfquerycreateobjectofclassandid-map">PFQueryCreateObjectOfClassAndId( Map )</a></li>
+<li><a href="#pfobjectcreateobjectwithclassname-classname">PFObjectCreateObjectWithClassName( className )</a></li>
+<li><a href="#pfobjectsaveall-objects">PFObjectSaveAll( objects )</a></li>
+<li><a href="#pfobjectsaveallinbackground-map">PFObjectSaveAllInBackground( Map )</a></li>
+<li><a href="#pffilecreatefilewithnameanddata-map">PFFileCreateFileWithNameAndData( Map )</a></li>
+<li><a href="#pffilecreatefilewithdata-data">PFFileCreateFileWithData( data )</a></li>
+<li><a href="#pfaclcreateacl">PFACLCreateACL()</a></li>
+<li><a href="#pfaclcreateaclwithuser-user">PFACLCreateACLWithUser( user )</a></li>
+<li><a href="#pfgeopointcreategeopoint">PFGeoPointCreateGeoPoint()</a></li>
+<li><a href="#pfgeopointcreategeopointwithlatitudeandlongitude-latitude-longitude">PFGeoPointCreateGeoPointWithLatitudeAndLongitude( latitude, longitude )</a></li>
+<li><a href="#setdefaulttiblobimagerepresentation-default">setDefaultTiBlobImageRepresentation( default )</a></li>
+<li><a href="#gettiblobdefaultimagerepresentation">getTiBlobDefaultImageRepresentation()</a></li>
+<li><a href="#willtiblobbesavedwithdefaultimagerepresentation-blob">willTiBlobBeSavedWithDefaultImageRepresentation( blob )</a></li>
+<li><a href="#parseiospushstoredevicetoken-devicetoken">ParseiOSPushStoreDeviceToken( deviceToken )</a><ul>
+<li><a href="#ios-only_1">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushhandlepush-pushdata">ParseiOSPushHandlePush( pushData )</a><ul>
+<li><a href="#ios-only_2">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushsubscribetochannel-channel">ParseiOSPushSubscribeToChannel( channel )</a><ul>
+<li><a href="#ios-only_3">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushsubscribetochannelinbackground-map">ParseiOSPushSubscribeToChannelInBackground( Map )</a><ul>
+<li><a href="#ios-only_4">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushunsubscribefromchannel-channel">ParseiOSPushUnsubscribeFromChannel( channel )</a><ul>
+<li><a href="#ios-only_5">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushunsubscribefromchannelinbackground-map">ParseiOSPushUnsubscribeFromChannelInBackground( Map )</a><ul>
+<li><a href="#ios-only_6">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushsendpushmessagetochannel-map">ParseiOSPushSendPushMessageToChannel( Map )</a><ul>
+<li><a href="#ios-only_7">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushsendpushmessagetochannelinbackground-map">ParseiOSPushSendPushMessageToChannelInBackground( Map )</a><ul>
+<li><a href="#ios-only_8">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushsendpushdatatochannel-map">ParseiOSPushSendPushDataToChannel( Map )</a><ul>
+<li><a href="#ios-only_9">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushsendpushdatatochannelinbackground-map">ParseiOSPushSendPushDataToChannelInBackground( Map )</a><ul>
+<li><a href="#ios-only_10">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushgetsubscribedchannels">ParseiOSPushGetSubscribedChannels()</a><ul>
+<li><a href="#ios-only_11">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseiospushgetsubscribedchannelsinbackground-map">ParseiOSPushGetSubscribedChannelsInBackground( Map )</a><ul>
+<li><a href="#ios-only_12">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#facebookrequestwithgraphpath-path-params-httpmethod-callback">FacebookRequestWithGraphPath ( path, params, httpMethod, callback )</a><ul>
+<li><a href="#ios-only_13">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#facebookrequest-method-params-callback">FacebookRequest ( method, params, callback )</a><ul>
+<li><a href="#ios-only_14">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#facebookdialog-action-params-callback">FacebookDialog ( action, params, callback )</a><ul>
+<li><a href="#ios-only_15">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsubscribewithurl-channel-url">ParseAndroidPushSubscribeWithURL( channel, url )</a><ul>
+<li><a href="#android-only">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsubscribewithclassname-channel-classname">ParseAndroidPushSubscribeWithClassName( channel, className )</a><ul>
+<li><a href="#android-only_1">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsubscribewithactivity-channel-activity">ParseAndroidPushSubscribeWithActivity( channel, activity )</a><ul>
+<li><a href="#android-only_2">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsubscribe-channel">ParseAndroidPushSubscribe( channel )</a><ul>
+<li><a href="#android-only_3">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushunsubscribe-channel">ParseAndroidPushUnsubscribe( channel )</a><ul>
+<li><a href="#android-only_4">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushgetsubscriptions">ParseAndroidPushGetSubscriptions( )</a><ul>
+<li><a href="#android-only_5">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushclearallnotifications">ParseAndroidPushClearAllNotifications( )</a><ul>
+<li><a href="#android-only_6">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsetupdefaultactionreceiver-action-defaultcallback">ParseAndroidPushSetupDefaultActionReceiver( action, defaultCallback )</a><ul>
+<li><a href="#android-only_7">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushregisterdefaultactionreceiver">ParseAndroidPushRegisterDefaultActionReceiver( )</a><ul>
+<li><a href="#android-only_8">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushunregisterdefaultactionreceiver">ParseAndroidPushUnregisterDefaultActionReceiver( )</a><ul>
+<li><a href="#android-only_9">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsendpushmessagetochannel-map">ParseAndroidPushSendPushMessageToChannel( Map )</a><ul>
+<li><a href="#android-only_10">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsendpushmessagetochannelinbackground-map">ParseAndroidPushSendPushMessageToChannelInBackground( Map )</a><ul>
+<li><a href="#android-only_11">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsendpushdatatochannel-map">ParseAndroidPushSendPushDataToChannel( Map )</a><ul>
+<li><a href="#android-only_12">Android Only</a></li>
+</ul>
+</li>
+<li><a href="#parseandroidpushsendpushdatatochannelinbackground-map">ParseAndroidPushSendPushDataToChannelInBackground( Map )</a><ul>
+<li><a href="#android-only_13">Android Only</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#facebooksessionisvalid">FacebookSessionIsValid</a><ul>
+<li><a href="#ios-only_16">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#facebooksessionexpirationdate">FacebookSessionExpirationDate</a><ul>
+<li><a href="#ios-only_17">iOS Only</a></li>
+</ul>
+</li>
+<li><a href="#parsehasfacebookapplicationid">ParseHasFacebookApplicationId</a></li>
+</ul>
+</li>
+<li><a href="#tiblob-default-image-representations">TiBlob Default Image Representations</a><ul>
+<li><a href="#ktiblobimagedefaultpng">kTiBlobImageDefaultPNG</a></li>
+<li><a href="#ktiblobimagedefaultjpeg">kTiBlobImageDefaultJPEG</a></li>
+</ul>
+</li>
+<li><a href="#error-code-properties">Error Code Properties</a><ul>
+<li><a href="#kparseerrorinternalserver">kParseErrorInternalServer</a></li>
+<li><a href="#kparseerrorconnectionfailed">kParseErrorConnectionFailed</a></li>
+<li><a href="#kparseerrorobjectnotfound">kParseErrorObjectNotFound</a></li>
+<li><a href="#kparseerrorinvalidquery">kParseErrorInvalidQuery</a></li>
+<li><a href="#kparseerrorinvalidclassname">kParseErrorInvalidClassName</a></li>
+<li><a href="#kparseerrormissingobjectid">kParseErrorMissingObjectId</a></li>
+<li><a href="#kparseerrorinvalidkeyname">kParseErrorInvalidKeyName</a></li>
+<li><a href="#kparseerrorinvalidpointer">kParseErrorInvalidPointer</a></li>
+<li><a href="#kparseerrorinvalidjson">kParseErrorInvalidJSON</a></li>
+<li><a href="#kparseerrorcommandunavailable">kParseErrorCommandUnavailable</a></li>
+<li><a href="#kparseerrorincorrecttype">kParseErrorIncorrectType</a></li>
+<li><a href="#kparseerrorinvalidchannelname">kParseErrorInvalidChannelName</a></li>
+<li><a href="#kparseerrorinvaliddevicetoken">kParseErrorInvalidDeviceToken</a></li>
+<li><a href="#kparseerrorpushmisconfigured">kParseErrorPushMisconfigured</a></li>
+<li><a href="#kparseerrorobjecttoolarge">kParseErrorObjectTooLarge</a></li>
+<li><a href="#kparseerroroperationforbidden">kParseErrorOperationForbidden</a></li>
+<li><a href="#kparseerrorcachemiss">kParseErrorCacheMiss</a></li>
+<li><a href="#kparseerrorinvalidnestedkey">kParseErrorInvalidNestedKey</a></li>
+<li><a href="#kparseerrorinvalidfilename">kParseErrorInvalidFileName</a></li>
+<li><a href="#kparseerrorinvalidacl">kParseErrorInvalidACL</a></li>
+<li><a href="#kparseerrortimeout">kParseErrorTimeout</a></li>
+<li><a href="#kparseerrorinvalidemailaddress">kParseErrorInvalidEmailAddress</a></li>
+<li><a href="#kparseerrorusernamemissingerror">kParseErrorUsernameMissingError</a></li>
+<li><a href="#kparseerroruserpasswordmissingerror">kParseErrorUserPasswordMissingError</a></li>
+<li><a href="#kparseerrorusernametakenerror">kParseErrorUsernameTakenError</a></li>
+<li><a href="#kparseerroruseremailtakenerror">kParseErrorUserEmailTakenError</a></li>
+<li><a href="#kparseerroruseremailmissing">kParseErrorUserEmailMissing</a></li>
+<li><a href="#kparseerroruserwithemailnotfound">kParseErrorUserWithEmailNotFound</a></li>
+<li><a href="#kparseerrorusercannotbealteredwithoutsession">kParseErrorUserCannotBeAlteredWithoutSession</a></li>
+<li><a href="#kparseerrorusercanonlybecreatedthroughsignup">kParseErrorUserCanOnlyBeCreatedThroughSignUp</a></li>
+<li><a href="#kparseerrorfacebookaccountalreadylinked">kParseErrorFacebookAccountAlreadyLinked</a></li>
+<li><a href="#kparseerroruseridmismatch">kParseErrorUserIdMismatch</a></li>
+<li><a href="#kparseerrorfacebookidmissing">kParseErrorFacebookIdMissing</a></li>
+<li><a href="#kparseerrorfacebookinvalidsession">kParseErrorFacebookInvalidSession</a></li>
+</ul>
+</li>
+<li><a href="#custom-error-constants-not-from-parse-api">Custom Error Constants (Not From Parse API)</a><ul>
+<li><a href="#kparseerroruserwrongcredentials">kParseErrorUserWrongCredentials</a></li>
+<li><a href="#kparseerrorquerynoobjectsfound">kParseErrorQueryNoObjectsFound</a></li>
+<li><a href="#kparseerrorfacebooklogincancelled">kParseErrorFacebookLoginCancelled</a></li>
+<li><a href="#kparseerrormissingorinvalidarguments">kParseErrorMissingOrInvalidArguments</a></li>
+<li><a href="#kparseerrorfunctiondidnotsucceed">kParseErrorFunctionDidNotSucceed</a></li>
+</ul>
+</li>
+<li><a href="#parsecachepolicy-constants">ParseCachePolicy Constants</a><ul>
+<li><a href="#kparsecachepolicyignorecache">kParseCachePolicyIgnoreCache</a></li>
+<li><a href="#kparsecachepolicycacheonly">kParseCachePolicyCacheOnly</a></li>
+<li><a href="#kparsecachepolicynetworkonly">kParseCachePolicyNetworkOnly</a></li>
+<li><a href="#kparsecachepolicycacheelsenetwork">kParseCachePolicyCacheElseNetwork</a></li>
+<li><a href="#kparsecachepolicynetworkelsecache">kParseCachePolicyNetworkElseCache</a></li>
+<li><a href="#kparsecachepolicycachethennetwork">kParseCachePolicyCacheThenNetwork</a></li>
+</ul>
+</li>
+<li><a href="#release-notes">Release Notes</a></li>
+<li><a href="#author">Author</a></li>
+<li><a href="#feedback-and-support">Feedback and Support</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<hr />
+<h1 id="parse-module-reference">Parse Module Reference</h1>
+<hr />
+<hr />
+<h2 id="types">Types:</h2>
+<p>String - Javascript String Type</p>
+<p>Boolean - Javascript Boolean Type Ex: <code>true false</code></p>
+<p>Number - Javascript Number Type</p>
+<p>Date - Javascript Date Object Ex: <code>new Date()</code></p>
+<p>Map - Javascript object type with key-value pairs Ex: <code>{ name: "John", age: 45 }</code></p>
+<p>Array - Javascript array Ex: <code>new Array()</code></p>
+<p>Null - Javascript   <code>null</code></p>
+<p>PFObject - Parse API PFObject Type</p>
+<p>PFUser - Parse API PFObject Type</p>
+<p>PFQuery - Parse API PFQuery Type</p>
+<p>PFFile - Parse API PFFile Type</p>
+<p>PFGeoPoint - Parse API PFGeoPoint Type</p>
+<p>PFACL - Parse API PFACL Type</p>
+<p>PFTypes - Parse API PFObject, PFUser, PFFile, PFACL, PFGeoPoint object</p>
+<p>JSONTypes - String, Boolean, Number, Date, Map(of JSONTypes), Array(of JSONTypes), Null</p>
+<p>Callback - a function with one argument Ex: <code>function(event) {  }</code></p>
+<p>TiBlob - Titanium Blob Type. </p>
+<hr />
+<hr />
+<h2 id="functions">Functions</h2>
+<h3 id="initparse-map">initParse( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    applicationId: String
+    clientKey: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="enableparsemoduledebuglog-enable">enableParseModuleDebugLog( enable )</h3>
+<p>// Debugging Logs are Turned Off By Default</p>
+<p><strong>Arguments:</strong></p>
+<p>enable: Boolean</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="createpfobject">createPFObject()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFObject</p>
+<hr />
+<h3 id="createpffile">createPFFile()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFFile</p>
+<hr />
+<h3 id="createpfquery">createPFQuery()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFQuery</p>
+<hr />
+<h3 id="createpfuser">createPFUser()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFUser</p>
+<hr />
+<h3 id="pfusercurrentuser">PFUserCurrentUser()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>user: PFUser</p>
+<hr />
+<h3 id="pfuserlogin-map">PFUserLogin( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    username: String
+    password: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    user: PFUser
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="pfuserlogininbackground-map">PFUserLoginInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    username: String
+    password: String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    user: PFUser
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="pfuserlogout">PFUserLogout()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="pfuserrequestpasswordresetforemail-email">PFUserRequestPasswordResetForEmail( email )</h3>
+<p><strong>Arguments:</strong></p>
+<p>email: String</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="pfuserrequestpasswordresetforemailinbackground-map">PFUserRequestPasswordResetForEmailInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    email: String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="pfuserloginwithfacebookinbackground-map">PFUserLoginWithFacebookInBackground( Map )</h3>
+<h4 id="ios-only">iOS Only</h4>
+<p>Go here to see all <a href="https://developers.facebook.com/docs/reference/api/permissions/">Facebook Permissions.</a></p>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    permissions: Array of String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="pfquerycreateuserobjectwithid-id">PFQueryCreateUserObjectWithId( id )</h3>
+<p><strong>Arguments:</strong></p>
+<p>id: String</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    user: PFUser or Null
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="pfquerycreatequeryforuser">PFQueryCreateQueryForUser()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFQuery or Null</p>
+<hr />
+<h3 id="pfquerycreatequerywithclassname-classname">PFQueryCreateQueryWithClassName( className )</h3>
+<p><strong>Arguments:</strong></p>
+<p>className: string</p>
+<p><strong>Returns:</strong></p>
+<p>PFQuery or Null</p>
+<hr />
+<h3 id="pfquerycreateobjectofclassandid-map">PFQueryCreateObjectOfClassAndId( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    objectClass: String
+    objectId: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    object: PFObject or Null
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="pfobjectcreateobjectwithclassname-classname">PFObjectCreateObjectWithClassName( className )</h3>
+<p><strong>Arguments:</strong></p>
+<p>className: String</p>
+<p><strong>Returns:</strong></p>
+<p>PFObject or Null</p>
+<hr />
+<h3 id="pfobjectsaveall-objects">PFObjectSaveAll( objects )</h3>
+<p><strong>Arguments:</strong></p>
+<p>objects: Array of PFObjects</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="pfobjectsaveallinbackground-map">PFObjectSaveAllInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    objects: Array of PFObjects
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map
+    {
+        errorCode: Number
+        error: String
+    }</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="pffilecreatefilewithnameanddata-map">PFFileCreateFileWithNameAndData( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    name: String
+    data: TiBlob
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>PFFile or null</p>
+<hr />
+<h3 id="pffilecreatefilewithdata-data">PFFileCreateFileWithData( data )</h3>
+<p><strong>Arguments:</strong></p>
+<p>data: TiBlob</p>
+<p><strong>Returns:</strong></p>
+<p>PFFile or null</p>
+<hr />
+<h3 id="pfaclcreateacl">PFACLCreateACL()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFACL or null</p>
+<hr />
+<h3 id="pfaclcreateaclwithuser-user">PFACLCreateACLWithUser( user )</h3>
+<p><strong>Arguments:</strong></p>
+<p>user: PFUser</p>
+<p><strong>Returns:</strong></p>
+<p>PFACL or null</p>
+<hr />
+<h3 id="pfgeopointcreategeopoint">PFGeoPointCreateGeoPoint()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>PFGeoPoint or null</p>
+<hr />
+<h3 id="pfgeopointcreategeopointwithlatitudeandlongitude-latitude-longitude">PFGeoPointCreateGeoPointWithLatitudeAndLongitude( latitude, longitude )</h3>
+<p><strong>Arguments:</strong></p>
+<p>latitude: Number<br />
+longitude: Number</p>
+<p><strong>Returns:</strong></p>
+<p>PFGeoPoint or null</p>
+<hr />
+<h3 id="setdefaulttiblobimagerepresentation-default">setDefaultTiBlobImageRepresentation( default )</h3>
+<p>The default without setting this is: <code>parseapi.kTiBlobImageDefaultPNG</code></p>
+<p><strong>Arguments:</strong></p>
+<p>default: <code>parseapi.kTiBlobImageDefaultPNG</code> or <code>parseapi.kTiBlobImageDefaultJPG</code></p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="gettiblobdefaultimagerepresentation">getTiBlobDefaultImageRepresentation()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p><code>parseapi.kTiBlobImageDefaultPNG</code> or <code>parseapi.kTiBlobImageDefaultJPG</code></p>
+<hr />
+<h3 id="willtiblobbesavedwithdefaultimagerepresentation-blob">willTiBlobBeSavedWithDefaultImageRepresentation( blob )</h3>
+<p><strong>Arguments:</strong></p>
+<p>blob: TiBlob</p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="parseiospushstoredevicetoken-devicetoken">ParseiOSPushStoreDeviceToken( deviceToken )</h3>
+<h4 id="ios-only_1">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>deviceToken: String </p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseiospushhandlepush-pushdata">ParseiOSPushHandlePush( pushData )</h3>
+<h4 id="ios-only_2">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>pushData: Map <br />
+</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseiospushsubscribetochannel-channel">ParseiOSPushSubscribeToChannel( channel )</h3>
+<h4 id="ios-only_3">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>channel: String</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseiospushsubscribetochannelinbackground-map">ParseiOSPushSubscribeToChannelInBackground( Map )</h3>
+<h4 id="ios-only_4">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    channel: String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseiospushunsubscribefromchannel-channel">ParseiOSPushUnsubscribeFromChannel( channel )</h3>
+<h4 id="ios-only_5">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>channel: String</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseiospushunsubscribefromchannelinbackground-map">ParseiOSPushUnsubscribeFromChannelInBackground( Map )</h3>
+<h4 id="ios-only_6">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    channel: String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseiospushsendpushmessagetochannel-map">ParseiOSPushSendPushMessageToChannel( Map )</h3>
+<h4 id="ios-only_7">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    channel: String
+    message: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseiospushsendpushmessagetochannelinbackground-map">ParseiOSPushSendPushMessageToChannelInBackground( Map )</h3>
+<h4 id="ios-only_8">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    channel: String
+    message: String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseiospushsendpushdatatochannel-map">ParseiOSPushSendPushDataToChannel( Map )</h3>
+<h4 id="ios-only_9">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    channel: String
+    data: Map of JSONType
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseiospushsendpushdatatochannelinbackground-map">ParseiOSPushSendPushDataToChannelInBackground( Map )</h3>
+<h4 id="ios-only_10">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    channel: String
+    data: Map of JSONType
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseiospushgetsubscribedchannels">ParseiOSPushGetSubscribedChannels()</h3>
+<h4 id="ios-only_11">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>void  <br />
+</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    channels: Array of Strings
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseiospushgetsubscribedchannelsinbackground-map">ParseiOSPushGetSubscribedChannelsInBackground( Map )</h3>
+<h4 id="ios-only_12">iOS Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    channels: Array of Strings
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="facebookrequestwithgraphpath-path-params-httpmethod-callback">FacebookRequestWithGraphPath ( path, params, httpMethod, callback )</h3>
+<h4 id="ios-only_13">iOS Only</h4>
+<p>See this <a href="index.html">Module's Guide</a> for more information</p>
+<p>Graph API</p>
+<p><strong>Arguments:</strong></p>
+<p>path: String<br />
+params: Map of JSONTypes or TiBlob<br />
+httpMethod: String<br />
+callback: Callback<br />
+</p>
+<p><strong>Callbacks:</strong></p>
+<p>callback:
+    event: Map</p>
+<pre><code>{
+    success: Boolean
+    result: Map of JSONTypes (The JSON Object Facebook returns)
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="facebookrequest-method-params-callback">FacebookRequest ( method, params, callback )</h3>
+<h4 id="ios-only_14">iOS Only</h4>
+<p>See this <a href="index.html">Module's Guide</a> for more information</p>
+<p>OLD REST API request (deprecated)</p>
+<p><strong>Arguments:</strong></p>
+<p>method: String<br />
+params: Map of JSONTypes or TiBlob<br />
+httpMethod: String<br />
+callback: Callback<br />
+</p>
+<p><strong>Callbacks:</strong></p>
+<p>callback:
+    event: Map</p>
+<pre><code>{
+    success: Boolean
+    result: Map of JSONTypes (The JSON Object Facebook returns)
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="facebookdialog-action-params-callback">FacebookDialog ( action, params, callback )</h3>
+<h4 id="ios-only_15">iOS Only</h4>
+<p>See this <a href="index.html">Module's Guide</a> for more information</p>
+<p><strong>Arguments:</strong></p>
+<p>action: String<br />
+params: Map of JSONTypes or TiBlob<br />
+callback: Callback</p>
+<p><strong>Callbacks:</strong></p>
+<p>callback:
+    event: Map</p>
+<pre><code>{
+    success: Boolean
+    cancelled: Boolean
+    result: String (Query part of url)
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseandroidpushsubscribewithurl-channel-url">ParseAndroidPushSubscribeWithURL( channel, url )</h3>
+<h4 id="android-only">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>channel: String<br />
+url: String</p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="parseandroidpushsubscribewithclassname-channel-classname">ParseAndroidPushSubscribeWithClassName( channel, className )</h3>
+<h4 id="android-only_1">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>channel: String<br />
+className: String</p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="parseandroidpushsubscribewithactivity-channel-activity">ParseAndroidPushSubscribeWithActivity( channel, activity )</h3>
+<h4 id="android-only_2">Android Only</h4>
+<p>Activity is usually <code>Ti.Android.currentActivity</code></p>
+<p><strong>Arguments:</strong></p>
+<p>channel: String<br />
+activity: Titanium.Android.Activity </p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="parseandroidpushsubscribe-channel">ParseAndroidPushSubscribe( channel )</h3>
+<h4 id="android-only_3">Android Only</h4>
+<p>This is usually the same as calling: <code>ParseAndroidPushSubscribeWithActivity( channel, Ti.Android.currentActivity )</code></p>
+<p><strong>Arguments:</strong></p>
+<p>channel: String </p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="parseandroidpushunsubscribe-channel">ParseAndroidPushUnsubscribe( channel )</h3>
+<h4 id="android-only_4">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>channel: String </p>
+<p><strong>Returns:</strong></p>
+<p>Boolean</p>
+<hr />
+<h3 id="parseandroidpushgetsubscriptions">ParseAndroidPushGetSubscriptions( )</h3>
+<h4 id="android-only_5">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Array of Strings</p>
+<hr />
+<h3 id="parseandroidpushclearallnotifications">ParseAndroidPushClearAllNotifications( )</h3>
+<h4 id="android-only_6">Android Only</h4>
+<p>This is a helper function which will clear all the notifications from the status bar.</p>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseandroidpushsetupdefaultactionreceiver-action-defaultcallback">ParseAndroidPushSetupDefaultActionReceiver( action, defaultCallback )</h3>
+<h4 id="android-only_7">Android Only</h4>
+<p>This helps you setup in-app notifications. The event in the callback is an android intent.  <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.Android.Intent-object">More Info on Intents</a></p>
+<p><strong>Arguments:</strong></p>
+<p>action: String<br />
+defaultCallback: Callback</p>
+<p><strong>Callbacks:</strong></p>
+<p>defaultCallback:
+    event: Map</p>
+<pre><code>{
+    intent: Titanium.Android.Intent
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseandroidpushregisterdefaultactionreceiver">ParseAndroidPushRegisterDefaultActionReceiver( )</h3>
+<h4 id="android-only_8">Android Only</h4>
+<p>This is a helper function to enable in app notifications when the android activity resumes.</p>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseandroidpushunregisterdefaultactionreceiver">ParseAndroidPushUnregisterDefaultActionReceiver( )</h3>
+<h4 id="android-only_9">Android Only</h4>
+<p>This is a helper function to disable in app notifications when the android activity is paused.</p>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseandroidpushsendpushmessagetochannel-map">ParseAndroidPushSendPushMessageToChannel( Map )</h3>
+<h4 id="android-only_10">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    channel: String
+    message: String
+    pushToAndroid: Boolean //defaults to true
+    pushToIOS: Boolean //defaults to false
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseandroidpushsendpushmessagetochannelinbackground-map">ParseAndroidPushSendPushMessageToChannelInBackground( Map )</h3>
+<h4 id="android-only_11">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    channel: String
+    message: String
+    success: Callback
+    error: Callback
+    pushToAndroid: Boolean //defaults to true
+    pushToIOS: Boolean //defaults to false
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="parseandroidpushsendpushdatatochannel-map">ParseAndroidPushSendPushDataToChannel( Map )</h3>
+<h4 id="android-only_12">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    channel: String
+    data: Map of JSONType
+    pushToAndroid: Boolean //defaults to true
+    pushToIOS: Boolean //defaults to false
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="parseandroidpushsendpushdatatochannelinbackground-map">ParseAndroidPushSendPushDataToChannelInBackground( Map )</h3>
+<h4 id="android-only_13">Android Only</h4>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    channel: String
+    data: Map of JSONType
+    success: Callback
+    error: Callback
+    pushToAndroid: Boolean //defaults to true
+    pushToIOS: Boolean //defaults to false
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Null</p>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<hr />
+<h2 id="properties">Properties</h2>
+<h3 id="facebooksessionisvalid">FacebookSessionIsValid</h3>
+<h4 id="ios-only_16">iOS Only</h4>
+<p><strong>Getter:</strong></p>
+<p>Boolean</p>
+<h3 id="facebooksessionexpirationdate">FacebookSessionExpirationDate</h3>
+<h4 id="ios-only_17">iOS Only</h4>
+<p><strong>Getter:</strong></p>
+<p>Date</p>
+<h3 id="parsehasfacebookapplicationid">ParseHasFacebookApplicationId</h3>
+<p><strong>Getter:</strong></p>
+<p>Boolean</p>
+<hr />
+<hr />
+<h2 id="tiblob-default-image-representations">TiBlob Default Image Representations</h2>
+<h3 id="ktiblobimagedefaultpng">kTiBlobImageDefaultPNG</h3>
+<h3 id="ktiblobimagedefaultjpeg">kTiBlobImageDefaultJPEG</h3>
+<hr />
+<hr />
+<h2 id="error-code-properties">Error Code Properties</h2>
+<p>These can be used to compare against the <code>errorCode</code> returned in all the Module functions.</p>
+<p>Code: Description</p>
+<h3 id="kparseerrorinternalserver">kParseErrorInternalServer</h3>
+<p>1: Internal server error. No information available. </p>
+<h3 id="kparseerrorconnectionfailed">kParseErrorConnectionFailed</h3>
+<p>100: The connection to the Parse servers failed. </p>
+<h3 id="kparseerrorobjectnotfound">kParseErrorObjectNotFound</h3>
+<p>101: Object doesn't exist, or has an incorrect password. </p>
+<h3 id="kparseerrorinvalidquery">kParseErrorInvalidQuery</h3>
+<p>102: You tried to find values matching a datatype that doesn't support exact database matching, like an array or a dictionary.</p>
+<h3 id="kparseerrorinvalidclassname">kParseErrorInvalidClassName</h3>
+<p>103: Missing or invalid classname. Classnames are case-sensitive. They must start with a letter, and a-zA-Z0-9_ are the only valid characters. </p>
+<h3 id="kparseerrormissingobjectid">kParseErrorMissingObjectId</h3>
+<p>104: Missing object id. </p>
+<h3 id="kparseerrorinvalidkeyname">kParseErrorInvalidKeyName</h3>
+<p>105: Invalid key name. Keys are case-sensitive. They must start with a letter, and a-zA-Z0-9_ are the only valid characters.<br />
+</p>
+<h3 id="kparseerrorinvalidpointer">kParseErrorInvalidPointer</h3>
+<p>106: Malformed pointer. Pointers must be arrays of a classname and an object id.</p>
+<h3 id="kparseerrorinvalidjson">kParseErrorInvalidJSON</h3>
+<p>107: Malformed json object. A json dictionary is expected.<br />
+</p>
+<h3 id="kparseerrorcommandunavailable">kParseErrorCommandUnavailable</h3>
+<p>108: Tried to access a feature only available internally.<br />
+</p>
+<h3 id="kparseerrorincorrecttype">kParseErrorIncorrectType</h3>
+<p>111: Field set to incorrect type.</p>
+<h3 id="kparseerrorinvalidchannelname">kParseErrorInvalidChannelName</h3>
+<p>112: Invalid channel name. A channel name is either an empty string (the broadcast channel) or contains only a-zA-Z0-9_ characters and starts with a letter. </p>
+<h3 id="kparseerrorinvaliddevicetoken">kParseErrorInvalidDeviceToken</h3>
+<p>114: Invalid device token. </p>
+<h3 id="kparseerrorpushmisconfigured">kParseErrorPushMisconfigured</h3>
+<p>115: Push is misconfigured. See details to find out how.</p>
+<h3 id="kparseerrorobjecttoolarge">kParseErrorObjectTooLarge</h3>
+<p>116: The object is too large. </p>
+<h3 id="kparseerroroperationforbidden">kParseErrorOperationForbidden</h3>
+<p>119: That operation isn't allowed for clients.</p>
+<h3 id="kparseerrorcachemiss">kParseErrorCacheMiss</h3>
+<p>120: The results were not found in the cache. </p>
+<h3 id="kparseerrorinvalidnestedkey">kParseErrorInvalidNestedKey</h3>
+<p>121: Keys may not include '$' or '.'.</p>
+<h3 id="kparseerrorinvalidfilename">kParseErrorInvalidFileName</h3>
+<p>122: Invalid file name. A file name contains only a-zA-Z0-9_. characters and is between 1 and 36 characters.</p>
+<h3 id="kparseerrorinvalidacl">kParseErrorInvalidACL</h3>
+<p>123: Invalid ACL. An ACL with an invalid format was saved. This should not happen if you use PFACL.</p>
+<h3 id="kparseerrortimeout">kParseErrorTimeout</h3>
+<p>124: The request timed out on the server. Typically this indicates the request is too expensive.</p>
+<h3 id="kparseerrorinvalidemailaddress">kParseErrorInvalidEmailAddress</h3>
+<p>125: The email address was invalid.</p>
+<hr />
+<h3 id="kparseerrorusernamemissingerror">kParseErrorUsernameMissingError</h3>
+<p>200: Username is missing or empty </p>
+<h3 id="kparseerroruserpasswordmissingerror">kParseErrorUserPasswordMissingError</h3>
+<p>201: Password is missing or empty </p>
+<h3 id="kparseerrorusernametakenerror">kParseErrorUsernameTakenError</h3>
+<p>202: Username has already been taken </p>
+<h3 id="kparseerroruseremailtakenerror">kParseErrorUserEmailTakenError</h3>
+<p>203: Email has already been taken</p>
+<h3 id="kparseerroruseremailmissing">kParseErrorUserEmailMissing</h3>
+<p>204: The email is missing, and must be specified</p>
+<h3 id="kparseerroruserwithemailnotfound">kParseErrorUserWithEmailNotFound</h3>
+<p>205: A user with the specified email was not found </p>
+<h3 id="kparseerrorusercannotbealteredwithoutsession">kParseErrorUserCannotBeAlteredWithoutSession</h3>
+<p>206: The user cannot be altered by a client without the session. </p>
+<h3 id="kparseerrorusercanonlybecreatedthroughsignup">kParseErrorUserCanOnlyBeCreatedThroughSignUp</h3>
+<p>207: Users can only be created through sign up</p>
+<h3 id="kparseerrorfacebookaccountalreadylinked">kParseErrorFacebookAccountAlreadyLinked</h3>
+<p>208: An existing Facebook account already linked to another user.</p>
+<h3 id="kparseerroruseridmismatch">kParseErrorUserIdMismatch</h3>
+<p>209: User ID mismatch</p>
+<h3 id="kparseerrorfacebookidmissing">kParseErrorFacebookIdMissing</h3>
+<p>250: Facebook id missing from request </p>
+<h3 id="kparseerrorfacebookinvalidsession">kParseErrorFacebookInvalidSession</h3>
+<p>251: Invalid Facebook session </p>
+<hr />
+<h2 id="custom-error-constants-not-from-parse-api">Custom Error Constants (Not From Parse API)</h2>
+<h3 id="kparseerroruserwrongcredentials">kParseErrorUserWrongCredentials</h3>
+<p>7000: Wrong Username &amp; Password combination</p>
+<h3 id="kparseerrorquerynoobjectsfound">kParseErrorQueryNoObjectsFound</h3>
+<p>7001: No Objects Found with Query</p>
+<h3 id="kparseerrorfacebooklogincancelled">kParseErrorFacebookLoginCancelled</h3>
+<p>7002: User Cancelled Facebook Login/SignUp</p>
+<h3 id="kparseerrormissingorinvalidarguments">kParseErrorMissingOrInvalidArguments</h3>
+<p>8000: Missing or Invalid Arguments</p>
+<h3 id="kparseerrorfunctiondidnotsucceed">kParseErrorFunctionDidNotSucceed</h3>
+<p>8001: Function Did Not Succeed</p>
+<hr />
+<hr />
+<h2 id="parsecachepolicy-constants">ParseCachePolicy Constants</h2>
+<p>These constants can be passed to the <code>PFQuery.cachePolicy</code> getter and setter. <a href="./pfqueryreference.html">PFQuery Reference</a></p>
+<h3 id="kparsecachepolicyignorecache">kParseCachePolicyIgnoreCache</h3>
+<p>The query does not load from the cache or save results to the cache.
+kParseCachePolicyIgnoreCache is the default cache policy. </p>
+<h3 id="kparsecachepolicycacheonly">kParseCachePolicyCacheOnly</h3>
+<p>The query only loads from the cache, ignoring the network. <br />
+If there are no cached results, that causes an error.</p>
+<h3 id="kparsecachepolicynetworkonly">kParseCachePolicyNetworkOnly</h3>
+<p>The query does not load from the cache, but it will save results to the cache.<br />
+</p>
+<h3 id="kparsecachepolicycacheelsenetwork">kParseCachePolicyCacheElseNetwork</h3>
+<p>The query first tries to load from the cache, but if that fails, it loads results from the network. <br />
+If neither cache nor network succeed there is an error.</p>
+<h3 id="kparsecachepolicynetworkelsecache">kParseCachePolicyNetworkElseCache</h3>
+<p>The query first tries to load from the network, but if that fails, it loads results from the cache. <br />
+If neither network nor cache succeed, there is an error. </p>
+<h3 id="kparsecachepolicycachethennetwork">kParseCachePolicyCacheThenNetwork</h3>
+<p>The query first loads from the cache, then loads from the network. <br />
+In this case, the callback will actually be called twice - first with the cached results, then with the network results. <br />
+Since it returns two results at different times, this cache policy cannot be used synchronously with findObjects.</p>
+<hr />
+<hr />
+<h2 id="release-notes">Release Notes</h2>
+<p><a href="./releasenotes.html">Click here to see version and release notes</a></p>
+<hr />
+<hr />
+<h2 id="author">Author</h2>
+<p>Programmer: David E. Rodriguez</p>
+<p>Company: Forge42</p>
+<p>Website: www.forge42.com</p>
+<p>Twitter: @programmerdave</p>
+<hr />
+<hr />
+<h2 id="feedback-and-support">Feedback and Support</h2>
+<p>If you find any bugs, please let me know.</p>
+<p>Also when reporting a bug or problem, please send me your iOS <code>build.log</code> file in your e-mail if using the iOS version of the module.</p>
+<p>Please direct questions, feedback, and concerns about this module to <a href="support@forge42.com">support@forge42.com</a></p>
+<p>Please include <strong>Parse API Module iOS Support</strong><br />
+or <strong>Parse API Module Android Support</strong> in the subject line.</p>
+<p>I will get back to you in a timely manner.</p>
+<p>Please if you want a new feature in Parse, Tell them! The more requests they get, the faster they implement certain features. Send them an email at <a href="feedback@parse.com">feedback@parse.com</a></p>
+<hr />
+<hr />
+<h2 id="license">License</h2>
+<p>IMPORTANT: This module is unofficial and is not maintained by parse.com</p>
+<p>Copyright(c) 2011 by Forge42. </p>
+<p>Please see the LICENSE file included in the distribution for further details.</p>
+<p><a href="./index.html">&lt;- Go Back to Parse Module Guide</a></p>
+
+</body>
+</html>

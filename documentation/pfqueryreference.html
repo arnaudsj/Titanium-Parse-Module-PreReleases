@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    margin: 10px 13px 10px 13px;
+}
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre !important;
+	word-wrap: normal !important;
+	overflow-x: auto !important;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+@media screen and (min-width: 768px) {
+    body {
+        width: 748px;
+        margin:10px auto;
+    }
+}
+</style>
+<title>index.html</title>
+</head>
+<body>
+
+<h1 id="parse-api-module-pfquery-reference">Parse API Module PFQuery Reference</h1>
+<p><em>Please rate both the iOS and Android module in the marketplace if you find them useful :)</em></p>
+<p><a href="./releasenotes.html">Click here to see version and release notes</a></p>
+<p><a href="./index.html">&lt;- Go Back to Parse Module Guide</a></p>
+<hr />
+<hr />
+<h2 id="extra-reference">Extra Reference</h2>
+<p>This guide contains examples and everything you need to know to start using the parse api module. </p>
+<p>The following reference files list all the functions, arguments, and return values for the Parse Module.</p>
+<p><a href="./index.html">Parse Module Guide</a></p>
+<p><a href="./parsemodulereference.html">Parse Module Reference</a></p>
+<p><a href="./pfobjectreference.html">PFObject Reference</a></p>
+<p><a href="./pfqueryreference.html">PFQuery Reference</a></p>
+<p><a href="./pfuserreference.html">PFUser Reference</a></p>
+<p><a href="./pffilereference.html">PFFile Reference</a></p>
+<p><a href="./pfgeopointreference.html">PFGeoPoint Reference</a></p>
+<p><a href="./pfaclreference.html">PFACL Reference</a></p>
+<hr />
+<hr />
+<h2 id="table-of-contents">Table Of Contents</h2>
+<div class="toc">
+<ul>
+<li><a href="#parse-api-module-pfquery-reference">Parse API Module PFQuery Reference</a><ul>
+<li><a href="#extra-reference">Extra Reference</a></li>
+<li><a href="#table-of-contents">Table Of Contents</a></li>
+</ul>
+</li>
+<li><a href="#pfquery-reference">PFQuery Reference</a><ul>
+<li><a href="#types">Types:</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#querywithclassname-classname">queryWithClassName( className )</a></li>
+<li><a href="#wherekey-map">whereKey( Map )</a></li>
+<li><a href="#wherekeycontainedin-map">whereKeyContainedIn( Map )</a></li>
+<li><a href="#includekey-key">includeKey( key )</a></li>
+<li><a href="#orderbyascending">orderByAscending()</a></li>
+<li><a href="#orderbydescending">orderByDescending()</a></li>
+<li><a href="#resetquery">resetQuery()</a></li>
+<li><a href="#cancel-key">cancel( key )</a></li>
+<li><a href="#findobjects">findObjects()</a></li>
+<li><a href="#findobjectsinbackground-map">findObjectsInBackground( Map )</a></li>
+<li><a href="#countobjects">countObjects()</a></li>
+<li><a href="#countobjectsinbackground-map">countObjectsInBackground( Map )</a></li>
+<li><a href="#getobjectwithid-id">getObjectWithId( id )</a></li>
+<li><a href="#getobjectinbackgroundwithid-map">getObjectInBackgroundWithId( Map )</a></li>
+</ul>
+</li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#limit">limit</a></li>
+<li><a href="#skip">skip</a></li>
+<li><a href="#classname">className</a></li>
+<li><a href="#cachepolicy">cachePolicy</a></li>
+</ul>
+</li>
+<li><a href="#release-notes">Release Notes</a></li>
+<li><a href="#author">Author</a></li>
+<li><a href="#feedback-and-support">Feedback and Support</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<hr />
+<h1 id="pfquery-reference">PFQuery Reference</h1>
+<hr />
+<hr />
+<h2 id="types">Types:</h2>
+<p>String - Javascript String Type</p>
+<p>Boolean - Javascript Boolean Type Ex: <code>true false</code></p>
+<p>Number - Javascript Number Type</p>
+<p>Date - Javascript Date Object Ex: <code>new Date()</code></p>
+<p>Map - Javascript object type with key-value pairs Ex: <code>{ name: "John", age: 45 }</code></p>
+<p>Array - Javascript array Ex: <code>new Array()</code></p>
+<p>Null - Javascript   <code>null</code></p>
+<p>PFObject - Parse API PFObject Type</p>
+<p>PFUser - Parse API PFObject Type</p>
+<p>PFQuery - Parse API PFQuery Type</p>
+<p>PFFile - Parse API PFFile Type</p>
+<p>PFGeoPoint - Parse API PFGeoPoint Type</p>
+<p>PFACL - Parse API PFACL Type</p>
+<p>PFTypes - Parse API PFObject, PFUser, PFFile, PFACL, PFGeoPoint object</p>
+<p>JSONTypes - String, Boolean, Number, Date, Map(of JSONTypes), Array(of JSONTypes), Null</p>
+<p>Callback - a function with one argument Ex: <code>function(event) {  }</code></p>
+<p>TiBlob - Titanium Blob Type.</p>
+<hr />
+<hr />
+<h2 id="functions">Functions</h2>
+<h3 id="querywithclassname-classname">queryWithClassName( className )</h3>
+<p><strong>Arguments:</strong></p>
+<p>className: String</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="wherekey-map">whereKey( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    key: String
+    equalTo: String or PFTypes
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    greaterThan: String or PFTypes
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    greaterThanOrEqualTo: String or PFTypes
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    lessThan: String or PFTypes
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    lessThanOrEqualTo: String or PFTypes
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    notEqualTo: String or PFTypes
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    nearGeoPoint: PFGeoPoint
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    nearGeoPoint: PFGeoPoint
+    withinMiles: Number
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    nearGeoPoint: PFGeoPoint
+    withinKilometers: Number
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    nearGeoPoint: PFGeoPoint
+    withinRadians: Number
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    matchesRegex: String
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    containsString: String
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    hasPrefix: String
+}
+</code></pre>
+<p>OR</p>
+<pre><code>{
+    key: String
+    hasSuffix: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="wherekeycontainedin-map">whereKeyContainedIn( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    key: String
+
+    containedIn: Array of String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="includekey-key">includeKey( key )</h3>
+<p><strong>Arguments:</strong></p>
+<p>key: String</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="orderbyascending">orderByAscending()</h3>
+<p><strong>Arguments:</strong></p>
+<p>key: String</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="orderbydescending">orderByDescending()</h3>
+<p><strong>Arguments:</strong></p>
+<p>key: String</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="resetquery">resetQuery()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Boolean </p>
+<p>// Only fails if the PFQuery doesn't have a class name</p>
+<hr />
+<h3 id="cancel-key">cancel( key )</h3>
+<p>Cancels the current network request (if any). Ensures that callbacks won't be called.</p>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="findobjects">findObjects()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    objects: Array of PFObjects
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="findobjectsinbackground-map">findObjectsInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    objects: Array of PFObjects
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="countobjects">countObjects()</h3>
+<p><strong>Arguments:</strong></p>
+<p>void</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    count: Number
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="countobjectsinbackground-map">countObjectsInBackground( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    count: Number
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<h3 id="getobjectwithid-id">getObjectWithId( id )</h3>
+<p><strong>Arguments:</strong></p>
+<p>id: String</p>
+<p><strong>Returns:</strong></p>
+<p>Map:  <br />
+</p>
+<pre><code>{
+    succeeded: Boolean
+    object: PFObject
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<hr />
+<h3 id="getobjectinbackgroundwithid-map">getObjectInBackgroundWithId( Map )</h3>
+<p><strong>Arguments:</strong></p>
+<p>Map:</p>
+<pre><code>{
+    id: String
+    success: Callback
+    error: Callback
+}
+</code></pre>
+<p><strong>Callbacks:</strong></p>
+<p>success:
+    event: Map</p>
+<pre><code>{
+    object: PFObject
+}
+</code></pre>
+<p>error:
+    event: Map</p>
+<pre><code>{
+    errorCode: Number
+    error: String
+}
+</code></pre>
+<p><strong>Returns:</strong></p>
+<p>void</p>
+<hr />
+<hr />
+<h2 id="properties">Properties</h2>
+<h3 id="limit">limit</h3>
+<p><strong>Setter:</strong></p>
+<p>Number</p>
+<p><strong>Getter:</strong></p>
+<p>Number</p>
+<h3 id="skip">skip</h3>
+<p><strong>Setter:</strong></p>
+<p>Number</p>
+<p><strong>Getter:</strong></p>
+<p>Number</p>
+<h3 id="classname">className</h3>
+<p><strong>Getter:</strong></p>
+<p>Number</p>
+<h3 id="cachepolicy">cachePolicy</h3>
+<p>Has to be set for every PFQuery Object you create. More information can be found here: <a href="https://www.parse.com/docs/ios_guide#objects-caching">Parse.com Caching</a></p>
+<p>The ParseCachePolicy Constants are listed in the <a href="./parsemodulereference.html">Parse API Module Reference</a>.</p>
+<p><strong>Setter:</strong></p>
+<p>ParseCachePolicy Constant</p>
+<p>Example: <code>pfQuery.cachePolicy = parseapi.kParseCachePolicyNetworkElseCache;</code></p>
+<p><strong>Getter:</strong></p>
+<p>ParseCachePolicy Constant</p>
+<p>Example: <code>if( pfQuery.cachePolicy == parseapi.kParseCachePolicyNetworkElseCache ) {}</code></p>
+<hr />
+<hr />
+<h2 id="release-notes">Release Notes</h2>
+<p><a href="./releasenotes.html">Click here to see version and release notes</a></p>
+<hr />
+<hr />
+<h2 id="author">Author</h2>
+<p>Programmer: David E. Rodriguez</p>
+<p>Company: Forge42</p>
+<p>Website: www.forge42.com</p>
+<p>Twitter: @programmerdave</p>
+<hr />
+<hr />
+<h2 id="feedback-and-support">Feedback and Support</h2>
+<p>If you find any bugs, please let me know.</p>
+<p>Also when reporting a bug or problem, please send me your iOS <code>build.log</code> file in your e-mail if using the iOS version of the module.</p>
+<p>Please direct questions, feedback, and concerns about this module to <a href="support@forge42.com">support@forge42.com</a></p>
+<p>Please include <strong>Parse API Module iOS Support</strong><br />
+or <strong>Parse API Module Android Support</strong> in the subject line.</p>
+<p>I will get back to you in a timely manner.</p>
+<p>Please if you want a new feature in Parse, Tell them! The more requests they get, the faster they implement certain features. Send them an email at <a href="feedback@parse.com">feedback@parse.com</a></p>
+<hr />
+<hr />
+<h2 id="license">License</h2>
+<p>IMPORTANT: This module is unofficial and is not maintained by parse.com</p>
+<p>Copyright(c) 2011 by Forge42. </p>
+<p>Please see the LICENSE file included in the distribution for further details.</p>
+<p><a href="./index.html">&lt;- Go Back to Parse Module Guide</a></p>
+
+</body>
+</html>

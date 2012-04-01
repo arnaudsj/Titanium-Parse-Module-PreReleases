@@ -1,0 +1,2181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    margin: 10px 13px 10px 13px;
+}
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre !important;
+	word-wrap: normal !important;
+	overflow-x: auto !important;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+@media screen and (min-width: 768px) {
+    body {
+        width: 748px;
+        margin:10px auto;
+    }
+}
+</style>
+<title>index.html</title>
+</head>
+<body>
+
+<h1 id="parse-api-module-guide">Parse API Module Guide</h1>
+<p><em>Please rate both the iOS and Android module in the marketplace if you find them useful :)</em></p>
+<p><a href="./releasenotes.html">Click here to see version and release notes</a></p>
+<hr />
+<hr />
+<h2 id="extra-reference">Extra Reference</h2>
+<p>This guide contains examples and everything you need to know to start using the parse api module. </p>
+<p>The following reference files list all the functions, arguments, and return values for the Parse Module.</p>
+<p><a href="./index.html">Parse Module Guide</a></p>
+<p><a href="./parsemodulereference.html">Parse Module Reference</a></p>
+<p><a href="./pfobjectreference.html">PFObject Reference</a></p>
+<p><a href="./pfqueryreference.html">PFQuery Reference</a></p>
+<p><a href="./pfuserreference.html">PFUser Reference</a></p>
+<p><a href="./pffilereference.html">PFFile Reference</a></p>
+<p><a href="./pfgeopointreference.html">PFGeoPoint Reference</a></p>
+<p><a href="./pfaclreference.html">PFACL Reference</a></p>
+<hr />
+<hr />
+<h2 id="table-of-contents">Table Of Contents</h2>
+<div class="toc">
+<ul>
+<li><a href="#parse-api-module-guide">Parse API Module Guide</a><ul>
+<li><a href="#extra-reference">Extra Reference</a></li>
+<li><a href="#table-of-contents">Table Of Contents</a></li>
+<li><a href="#description">Description</a></li>
+</ul>
+</li>
+<li><a href="#parse-api-module-guide_1">Parse API Module Guide</a><ul>
+<li><a href="#accompanying-example-kitchen-sink">Accompanying Example / Kitchen Sink</a><ul>
+<li><a href="#its-important-to-namespace-your-application-properly">It's IMPORTANT to namespace your application properly!</a></li>
+</ul>
+</li>
+<li><a href="#accessing-the-module">Accessing the module</a></li>
+<li><a href="#saving-objects">Saving Objects</a><ul>
+<li><a href="#saving-each-pfobject-individually">Saving each PFObject Individually</a></li>
+<li><a href="#saving-many-pfobjects-at-once">Saving many PFObjects at once</a></li>
+</ul>
+</li>
+<li><a href="#retrieving-data">Retrieving Data</a><ul>
+<li><a href="#building-a-query-to-retrieve-data">Building a Query to retrieve data</a></li>
+<li><a href="#more-advanced-queries">More Advanced Queries</a></li>
+<li><a href="#building-a-query-and-getting-a-count-of-objects">Building a Query and Getting a Count of Objects</a></li>
+<li><a href="#getting-an-object-by-class-and-id-without-a-query">Getting An Object By Class and Id Without a Query</a></li>
+<li><a href="#performing-another-query">Performing another query</a></li>
+<li><a href="#pfquery-caching">PFQuery Caching</a></li>
+</ul>
+</li>
+<li><a href="#removing-data">Removing Data</a></li>
+<li><a href="#updating-objects-and-users">Updating Objects and Users</a></li>
+<li><a href="#geopoints">GeoPoints</a></li>
+<li><a href="#geoqueries">GeoQueries</a></li>
+<li><a href="#users">Users</a><ul>
+<li><a href="#during-login-or-sign-up-the-username-email-and-password-are-case-sensitive">During Login or Sign Up the username, email and password are CASE-SENSITIVE!</a></li>
+<li><a href="#sign-up-a-new-user">Sign Up a New User</a></li>
+<li><a href="#loginlogout-an-existing-user">Login/Logout an Existing User</a></li>
+<li><a href="#obtaining-the-current-user-or-checking-if-a-user-is-logged-in">Obtaining the Current User or Checking If a User Is Logged In</a></li>
+<li><a href="#refreshing-the-current-logged-in-pfuser-when-your-application-resumes-for-iphone-android">Refreshing the current logged in PFUser when your application resumes for iPhone &amp; Android</a></li>
+<li><a href="#updating-a-user-or-changing-data">Updating a User (or Changing Data)</a><ul>
+<li><a href="#updating-the-current-users-data">Updating The Current User's Data</a></li>
+<li><a href="#security-for-user-objectsupdating-other-users-data-you-cant">Security For User Objects/Updating Other User's Data (You Can't)</a></li>
+</ul>
+</li>
+<li><a href="#security-for-other-objectsaccess-control-lists">Security For Other Objects/Access Control Lists</a></li>
+<li><a href="#querying-a-pfuser">Querying a PFUser</a></li>
+<li><a href="#resetting-and-changing-passwords">Resetting and Changing Passwords</a><ul>
+<li><a href="#request-reset-password-example">Request Reset Password Example</a></li>
+<li><a href="#changing-passwords-example">Changing Passwords Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#facebook-integration">Facebook Integration</a><ul>
+<li><a href="#ios-only">iOS Only</a></li>
+<li><a href="#setup-your-facebook-api-key">Setup your Facebook API key</a></li>
+<li><a href="#checking-if-your-application-has-a-facebook-application-id">Checking if your application has a Facebook Application Id</a></li>
+<li><a href="#setting-up-your-custom-url-scheme-for-facebook-integration">Setting Up Your Custom URL Scheme for Facebook Integration</a></li>
+<li><a href="#facebook-login-sign-up">Facebook Login / Sign Up</a></li>
+<li><a href="#facebook-link-and-unlink-to-existing-pfuser">Facebook Link and Unlink to existing PFUser</a><ul>
+<li><a href="#link-example">Link Example</a></li>
+<li><a href="#unlink-example">Unlink Example</a></li>
+</ul>
+</li>
+<li><a href="#facebook-session-expiration-and-how-to-avoid-it">Facebook session expiration and how to avoid it</a></li>
+<li><a href="#doing-more-with-the-facebook-api">Doing more with the Facebook API</a><ul>
+<li><a href="#simple-graph-api-call">Simple Graph API Call</a></li>
+<li><a href="#create-an-event-with-graph-api">Create an Event with GRAPH API</a></li>
+<li><a href="#set-users-facebook-status-with-graph-api">Set user's Facebook status with Graph API</a></li>
+<li><a href="#post-a-photo-using-the-graph-api">Post a photo using the Graph API</a></li>
+<li><a href="#post-a-photo-using-the-deprecated-rest-api">Post a photo using the deprecated REST API</a></li>
+<li><a href="#show-the-facebook-feed-dialog">Show the Facebook Feed Dialog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#pffile-guide">PFFile Guide</a><ul>
+<li><a href="#storing-files-and-images">Storing Files and Images</a><ul>
+<li><a href="#example-for-storing-files">Example for storing files:</a></li>
+<li><a href="#example-for-storing-images">Example for storing images:</a></li>
+</ul>
+</li>
+<li><a href="#issues-with-storing-images-and-how-you-can-resolve-them">Issues with storing images and how you can resolve them.</a></li>
+<li><a href="#retrieving-files">Retrieving Files</a></li>
+</ul>
+</li>
+<li><a href="#relational-data-and-user-associations">Relational Data and User Associations</a><ul>
+<li><a href="#pfobjects-associations-example">PFObjects Associations Example:</a></li>
+<li><a href="#pfuser-associations-example">PFUser Associations Example:</a></li>
+<li><a href="#retrieve-pfuser-associations-example">Retrieve PFUser Associations Example:</a></li>
+</ul>
+</li>
+<li><a href="#ios-push-notifications">iOS Push Notifications</a><ul>
+<li><a href="#setting-up-certificates-keys-and-provisioning-profile">Setting up Certificates, Keys and Provisioning Profile</a></li>
+<li><a href="#integrating-parse-ios-push-notifications-with-titanium">Integrating Parse iOS Push Notifications with Titanium</a></li>
+<li><a href="#using-ios-push-notifications">Using iOS Push Notifications</a></li>
+</ul>
+</li>
+<li><a href="#android-push-notifications">Android Push Notifications</a><ul>
+<li><a href="#setting-up-android-notifications">Setting up Android Notifications</a></li>
+<li><a href="#integrating-parse-android-push-notifications-with-titanium">Integrating Parse Android Push Notifications with Titanium</a></li>
+<li><a href="#using-android-push-notifications">Using Android Push Notifications</a></li>
+</ul>
+</li>
+<li><a href="#handling-errors">Handling Errors</a><ul>
+<li><a href="#showing-debug-info">Showing Debug Info</a></li>
+</ul>
+</li>
+<li><a href="#release-notes">Release Notes</a></li>
+<li><a href="#author">Author</a></li>
+<li><a href="#feedback-and-support">Feedback and Support</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<hr />
+<h2 id="description">Description</h2>
+<p>Titanium Mobile Module for Parse.com iOS and Android APIs. 
+Uses native iOS &amp; Android API code from parse.com. Does not use their simple REST API. You have access to Objects, Queries, Users, Files, Push Notifications and anything else Parse can imagine.</p>
+<p>Please go to <a href="https://www.parse.com">www.parse.com</a> and sign up for an account!</p>
+<p>IMPORTANT: This module is unofficial and is not maintained by parse.com</p>
+<hr />
+<hr />
+<h1 id="parse-api-module-guide_1">Parse API Module Guide</h1>
+<p>If you need more information, please visit the Parse API iOS guide here: <a href="https://www.parse.com/docs/ios_guide">Parse API iOS Documentation</a> or the <a href="https://www.parse.com/docs/android_guide">Parse API Android Documentation</a></p>
+<p>If you need more clarification on using the library, please look at the Parse iOS documentation and then find the function you're looking for here to use it in Javascript. This module follows the naming conventions of the iOS documentation.</p>
+<hr />
+<h3 id="accompanying-example-kitchen-sink">Accompanying Example / Kitchen Sink</h3>
+<p>The accompanying example included with the module ( located in the <code>./example</code> directory ) shows working code for all of the following examples. You just need to provide it with your own Parse API Application ID and Client Key and you should be able to test out every example for yourself. Also if you want to use the Facebook Functions on iOS, you must provide your Facebook API key as well. Just make sure you can see what the console is printing out because most messages are printed using <code>Ti.API.info()</code>.</p>
+<h3 id="its-important-to-namespace-your-application-properly">It's IMPORTANT to namespace your application properly!</h3>
+<p>I would suggest using proper namespacing for your application. You can only use <code>require("com.forge42.parseapi")</code> once inside your application or else you'll run into problems. I suggest doing this at the start of your program along with the parse init function. An example for namespacing would be to put your application variables in a global variable. Remember all variables declared outside of any function scope will be global and available to your entire application due to the way javascript works.</p>
+<pre><code>Example:
+
+var myapp_globals = {};
+
+myapp_globals.parseapi = require("com.forge42.parseapi");
+
+myapp_globals.parseapi.parseInit( // init here );
+
+///// then in another file whenever you need to use the parseapi variable you can do the    following to access the parseapi object:
+
+myapp_globals.parseapi.somefunctionhere() /// any function here.
+</code></pre>
+<p>Just make sure to use a unique name for <code>myapp_globals</code>. That's how namespacing works. If you want some more information please see: <a href="http://developer.appcelerator.com/question/127559/are-titanium-modules-singletons-when-using-require">http://developer.appcelerator.com/question/127559/are-titanium-modules-singletons-when-using-require</a> and for javascript namespacing: <a href="http://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/">http://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/</a></p>
+<p>Another way to namespace your application is using the CommonJS standard. You can read more about that in the namespacing links above.</p>
+<hr />
+<hr />
+<h2 id="accessing-the-module">Accessing the module</h2>
+<p>To access this module from JavaScript, you would do the following:</p>
+<pre><code>var parseapi = require('com.forge42.parseapi');
+
+parseapi.initParse( {
+                    applicationId: "put your parse api APPLICATION ID here",
+                    clientKey: "put your parse api CLIENT KEY here"
+                });
+</code></pre>
+<p>The parseapi variable is a reference to the Module object. From this variable you can create PFObject, PFQuery, PFUser and access other functions from the Parse API.</p>
+<hr />
+<hr />
+<h2 id="saving-objects">Saving Objects</h2>
+<p>To save an object to the Parse API database, you need to create a PFObject using the <code>parseapi.createPFObject()</code> function of the module. Once it's created you can initialize it with a class name. In this example we use the TestObject class. You can save all types of data by using the <code>pfObject.setObject( data, key )</code> function from the PFObject you created. You can store the following types <em>null, Boolean, Number, String, or Object</em>. You can basically save anything that can be JSON encoded.</p>
+<p>There are two ways to save a PFObject. </p>
+<h3 id="saving-each-pfobject-individually">Saving each PFObject Individually</h3>
+<p><strong>Synchronously:</strong></p>
+<pre><code>// New PFObject
+var pfObject = parseapi.PFObjectCreateObjectWithClassName("TestObject");
+
+// Text, numbers
+pfObject.setObject("Cereal Box", "product");
+pfObject.setObject(1500, "quantity");
+
+// Can pass an object that will get stored using JSON
+pfObject.setObject({ name:"upc", upcData: 123214353 }, "productData");
+
+// Save Synchronously.
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = pfObject.save();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully saved object!");
+
+    Ti.API.info("Created Object ID: " + pfObject.objectId);
+} else {
+
+    Ti.API.info("Could not save object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronously:</strong> (In The Background with Callbacks)</p>
+<pre><code>// New PFObject
+var pfObject = parseapi.PFObjectCreateObjectWithClassName("TestObject");
+
+// Text, numbers
+pfObject.setObject("Cereal Box", "product");
+pfObject.setObject(1500, "quantity");
+
+// Can pass an object that will get stored using JSON
+pfObject.setObject({ name:"upc", upcData: 123214353 }, "productData");
+
+// Save Asynchronously.
+pfObject.saveInBackground( {
+
+    success: function(e) {
+        // event: nothing
+
+        Ti.API.info("Success!");
+
+        Ti.API.info("Created Object ID: " + pfObject.objectId);
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Error: " + JSON.stringify(e));
+    }
+});
+</code></pre>
+<h3 id="saving-many-pfobjects-at-once">Saving many PFObjects at once</h3>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var pfObject = null;
+var objectArray = new Array();
+
+for( var i = 1; i &lt; 5; i++ )
+{
+    // New PFObject
+    pfObject = parseapi.PFObjectCreateObjectWithClassName("TestObject");
+
+    // Text, numbers
+    pfObject.setObject("Candy Bars", "product");
+    pfObject.setObject(i*10, "quantity");
+
+    objectArray.push( pfObject );
+}
+
+// Save Synchronously.
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = parseapi.PFObjectSaveAll( objectArray );
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully saved all " + objectArray.length + " objects!");
+
+} else {
+
+    Ti.API.info("Could not save all objects. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var pfObject = null;
+var objectArray = new Array();
+
+for( var i = 1; i &lt; 5; i++ )
+{
+    // New PFObject
+    pfObject = parseapi.PFObjectCreateObjectWithClassName("TestObject");
+
+    // Text, numbers
+    pfObject.setObject("Candy Bars", "product");
+    pfObject.setObject(i*10, "quantity");
+
+    objectArray.push( pfObject );
+}
+
+// Save Asynchronously.
+// does not return or have any callbacks
+parseapi.PFObjectSaveAllInBackground( {
+                                            objects: objectArray
+                                            });
+</code></pre>
+<hr />
+<hr />
+<h2 id="retrieving-data">Retrieving Data</h2>
+<p>You can retrieve data from the Parse database using a PFQuery. There are a couple of ways to do this. One way is to retrieve an object by it's id. Every PFObject that gets saved to the Parse database automatically obtains an <code>pfObject.objectId</code> string, a <code>pfObject.createdAt</code> timestamp, and a <code>pfObject.updatedAt</code> timestamp. To retrieve an object using a PFQuery by it's id, we use the <code>pfQuery.getObjectWithId( id )</code> function.</p>
+<p>Aside from the <code>pfObject.objectId</code>, <code>pfObject.createdAt</code>, and <code>pfObject.updatedAt</code>, you can retrieve other data from the PFObject by using the <code>pfObject.objectForKey( key )</code> function.</p>
+<p>Here is an example:</p>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+var result = pfQuery.getObjectWithId("yaEuC5qrkF");
+
+// Synchronous.
+// returns (boolean)succeeded, (PFObject or null)object, (integer or null)errorCode, (string or null)error
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully queried object!");
+
+    var pfObject = result.object;
+
+    Ti.API.info("Start Query Result:");
+    Ti.API.info("    objectId: " + pfObject.objectId );
+    Ti.API.info("    updatedAt: " + pfObject.updatedAt );
+    Ti.API.info("    createdAt: " + pfObject.createdAt );
+    Ti.API.info("    product: " + pfObject.objectForKey("product") );
+    Ti.API.info("    quantity: " + pfObject.objectForKey("quantity") );
+    Ti.API.info("    productData: " + JSON.stringify( pfObject.objectForKey("productData") ) );
+    Ti.API.info("End Query Result");
+
+} else {
+
+    Ti.API.info("Could not query object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.getObjectInBackgroundWithId({
+    id: "yaEuC5qrkF",
+
+    success: function(e) {
+        // event: (PFObject)object
+
+        Ti.API.info("Success!");
+
+        var pfObject = e.object;
+
+        Ti.API.info("Start Query Result:");
+        Ti.API.info("    objectId: " + pfObject.objectId );
+        Ti.API.info("    updatedAt: " + pfObject.updatedAt );
+        Ti.API.info("    createdAt: " + pfObject.createdAt );
+        Ti.API.info("    product: " + pfObject.objectForKey("product") );
+        Ti.API.info("    quantity: " + pfObject.objectForKey("quantity") );
+        Ti.API.info("    productData: " + JSON.stringify( pfObject.objectForKey("productData") ) );
+        Ti.API.info("End Query Result");
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Error: " + JSON.stringify(e));
+    }
+
+});
+</code></pre>
+<p>The output from the above example would be:</p>
+<pre><code>[INFO] Successfully queried object!
+[INFO] Start Query Result:
+[INFO]     objectId: yaEuC5qrkF
+[INFO]     updatedAt: Wed Oct 12 2011 18:19:11 GMT-0400 (EDT)
+[INFO]     createdAt: Wed Oct 12 2011 18:19:11 GMT-0400 (EDT)
+[INFO]     product: Cereal Box
+[INFO]     quantity: 1500
+[INFO]     productData: {"name":"upc","upcData":123214353}
+[INFO] End Query Result
+</code></pre>
+<hr />
+<h3 id="building-a-query-to-retrieve-data">Building a Query to retrieve data</h3>
+<p>Another way to retrieve data is to build a query. Similar to performing a query on a database, you can build up the query using the <code>pfQuery.whereKey( { key: , query_type: } )</code> where query_type is one of the following: <strong>equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo</strong>. You can call this function more than once to build more complicated queries. You can also limit, skip and order the results.</p>
+<p>Here's an example:</p>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.whereKey( {
+    key: "product",
+    equalTo: "Cereal Box"   // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+});
+
+pfQuery.skip = 2; // skip the first two matching items
+pfQuery.limit = 5; // set the limit 
+pfQuery.orderByDescending("createdAt"); // can also be orderByAscending (takes a key as an argument)
+
+// Synchronous.
+// returns (boolean)succeeded, (Array or null)objects, (integer or null)errorCode, (string or null)error
+var result = pfQuery.findObjects();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully queried objects!");
+
+    var pfObjects = result.objects;
+
+    Ti.API.info("Query returned " + pfObjects.length + " PFObjects"); 
+    Ti.API.info("Start Query Result -------------------------------- ");
+
+    for( var i = 0; i &lt; pfObjects.length; i++ )
+    {
+        var pfObject = pfObjects[i];
+        Ti.API.info("  PFObject " + i);
+        Ti.API.info("    objectId: " + pfObject.objectId );
+        Ti.API.info("    updatedAt: " + pfObject.updatedAt );
+        Ti.API.info("    createdAt: " + pfObject.createdAt );
+        Ti.API.info("    product: " + pfObject.objectForKey("product") );
+        Ti.API.info("  End PFObject");
+        Ti.API.info("");
+    }
+    Ti.API.info("End Query Result -------------------------------- ");
+
+} else {
+
+    Ti.API.info("Could not query objects. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.whereKey( {
+    key: "product",
+    equalTo: "Cereal Box"   // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+});
+
+pfQuery.skip = 2; // skip the first two matching items
+pfQuery.limit = 5; // set the limit 
+pfQuery.orderByDescending("createdAt"); // can also be orderByAscending (takes a key as an argument)
+
+// Asynchronous
+pfQuery.findObjectsInBackground({
+    success: function(e) {
+        // event: (PFObject)object
+
+        Ti.API.info("Success!");
+
+        var pfObjects = e.objects;
+
+        Ti.API.info("Query returned " + pfObjects.length + " PFObjects"); 
+        Ti.API.info("Start Query Result -------------------------------- ");
+
+        for( var i = 0; i &lt; pfObjects.length; i++ )
+        {
+            var pfObject = pfObjects[i];
+            Ti.API.info("  PFObject " + i);
+            Ti.API.info("    objectId: " + pfObject.objectId );
+            Ti.API.info("    updatedAt: " + pfObject.updatedAt );
+            Ti.API.info("    createdAt: " + pfObject.createdAt );
+            Ti.API.info("    product: " + pfObject.objectForKey("product") );
+            //Ti.API.info("    quantity: " + pfObject.objectForKey("quantity") );
+            //Ti.API.info("    productData: " + JSON.stringify( pfObject.objectForKey("productData") ) );
+            Ti.API.info("  End PFObject");
+            Ti.API.info("");
+        }
+        Ti.API.info("End Query Result -------------------------------- ");
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Error: " + JSON.stringify(e));
+    }
+
+});
+</code></pre>
+<p>The output from the above example would be: </p>
+<pre><code>[INFO] Successfully queried objects!
+[INFO] Query returned 4 PFObjects
+[INFO] Start Query Result --------------------------------
+[INFO]   PFObject 0
+[INFO]     objectId: yaEuC5qrkF
+[INFO]     updatedAt: Wed Oct 12 2011 18:19:11 GMT-0400 (EDT)
+[INFO]     createdAt: Wed Oct 12 2011 18:19:11 GMT-0400 (EDT)
+[INFO]     product: Cereal Box
+[INFO]   End PFObject
+[INFO]
+[INFO]   PFObject 1
+[INFO]     objectId: EtmRlGx4bC
+[INFO]     updatedAt: Wed Oct 12 2011 18:18:20 GMT-0400 (EDT)
+[INFO]     createdAt: Wed Oct 12 2011 18:18:20 GMT-0400 (EDT)
+[INFO]     product: Cereal Box
+[INFO]   End PFObject
+[INFO]
+[INFO]   PFObject 2
+[INFO]     objectId: ZYIMJazOEP
+[INFO]     updatedAt: Wed Oct 12 2011 18:18:19 GMT-0400 (EDT)
+[INFO]     createdAt: Wed Oct 12 2011 18:18:19 GMT-0400 (EDT)
+[INFO]     product: Cereal Box
+[INFO]   End PFObject
+[INFO]
+[INFO]   PFObject 3
+[INFO]     objectId: XKJLnCDhfo
+[INFO]     updatedAt: Wed Oct 12 2011 18:17:36 GMT-0400 (EDT)
+[INFO]     createdAt: Wed Oct 12 2011 18:17:36 GMT-0400 (EDT)
+[INFO]     product: Cereal Box
+[INFO]   End PFObject
+[INFO]
+[INFO] End Query Result --------------------------------
+</code></pre>
+<hr />
+<h3 id="more-advanced-queries">More Advanced Queries</h3>
+<p>You can get more information on how to use some more advanced query functions in this <a href="http://blog.parse.com/2011/11/04/new-tricks-with-queries/">Parse.com Blog Article</a>.</p>
+<p>They will teach you how to use <code>pfQuery.whereContainedIn</code> and more.</p>
+<p>Remember that there is a one to one correspondence with this module and the API so just look in the module reference files and you can find any function you're looking for.</p>
+<p>You can also look at the <a href="./pfqueryreference.html">PFQuery Reference for this Module</a> to get more options that you can use in queries that aren't stated in this guide.</p>
+<hr />
+<h3 id="building-a-query-and-getting-a-count-of-objects">Building a Query and Getting a Count of Objects</h3>
+<p>You can use the same procedure that you use with <code>findObjects</code> to get an object count for a query you have built.</p>
+<p>Here's an example:</p>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.whereKey( {
+    key: "product",
+    equalTo: "Cereal Box"   // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+});
+
+// Synchronous.
+// returns (boolean)succeeded, (Number or null)count, (integer or null)errorCode, (string or null)error
+var result = pfQuery.countObjects();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully counted " + result.count + " objects!");
+
+} else {
+
+    Ti.API.info("Could not count objects. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.whereKey( {
+    key: "product",
+    equalTo: "Cereal Box"   // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+});
+
+// Asynchronous
+pfQuery.countObjectsInBackground({
+    success: function(e) {
+        // event: (Number)count
+
+        Ti.API.info("Successfully counted " + e.count + " objects!");
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Error: " + JSON.stringify(e));
+    }
+
+});
+</code></pre>
+<hr />
+<h3 id="getting-an-object-by-class-and-id-without-a-query">Getting An Object By Class and Id Without a Query</h3>
+<p>Instead of using a PFQuery to get and object from the database, you can just call the <code>parseapi.PFQueryCreateObjectOfClassAndId</code> function.</p>
+<p>Example:</p>
+<pre><code>var result = parseapi.PFQueryCreateObjectOfClassAndId( {
+                                    objectClass: "TestObject",
+                                    objectId: "reWZuh9q9o"
+                                });
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully got object!");
+
+    var pfObject = result.object;
+
+    //do something with the object. Print an example.
+    Ti.API.info( "Quantity: " + pfObject.objectForKey("quantity") );
+
+} else {
+
+    Ti.API.info("Could not get object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<hr />
+<h3 id="performing-another-query">Performing another query</h3>
+<p>To build another query without having to create a new pfQuery object, you can just call the <code>pfQuery.resetQuery()</code> function and you can begin building another query.</p>
+<hr />
+<h3 id="pfquery-caching">PFQuery Caching</h3>
+<p>To use the caching capabilities of PFQuery. You just have to set the <code>cachePolicy</code> for the PFQuery you're using. More information can be found at parse's website here: <a href="https://www.parse.com/docs/ios_guide#objects-caching">Parse.com Caching</a></p>
+<p>All the caching constants can be found in the <a href="./parsemodulereference.html">Parse Module Reference</a></p>
+<p>Example:</p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.whereKey( {
+    key: "product",
+    equalTo: "Cereal Box"   // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+});
+
+pfQuery.cachePolicy = kParseCachePolicyNetworkElseCache;
+
+// Synchronous.
+// returns (boolean)succeeded, (Array or null)objects, (integer or null)errorCode, (string or null)error
+var result = pfQuery.findObjects();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully queried objects!");
+
+} else {
+
+    Ti.API.info("Could not query objects. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><em>IMPORTANT:</em> You can only use the Asynchronous <code>pfQuery.findObjectsInBackground</code> when using the <code>kParseCachePolicyCacheThenNetwork</code> constant because it calls the success callback twice, first with the cached results, then with the network results.</p>
+<p>Example:</p>
+<pre><code>var pfQuery = parseapi.PFQueryCreateQueryWithClassName("TestObject");
+
+pfQuery.whereKey( {
+    key: "product",
+    equalTo: "Cereal Box"   // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+});
+
+pfQuery.cachePolicy = kParseCachePolicyCacheThenNetwork;
+
+// Asynchronous
+pfQuery.findObjectsInBackground({
+    success: function(e) {
+        // event: (PFObject)object
+
+        Ti.API.info("Success!");
+
+        // gets called twice, first with the cached results, then with the network results.
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Error: " + JSON.stringify(e));
+    }
+
+});
+</code></pre>
+<hr />
+<hr />
+<h2 id="removing-data">Removing Data</h2>
+<p>You can remove data easily by first retrieving a PFObject then calling its <code>pfObject.deleteObject()</code> function. Once you delete a PFObject using this function, object on the Parse database will be deleted but your copy of the PFObject will still be valid until you null out the variable.</p>
+<p>The following example assumes you already queried the Parse database and retrieved a PFObject. </p>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var pfObject = //Retrieve a PFObject using PFQuery as in the example above
+
+// delete object synchronously
+var result = pfObject.deleteObject();
+
+if( result.succeeded )
+{
+    Ti.API.info("Successfully deleted object with ID: " + pfObject.objectId);
+}
+else
+{
+    Ti.API.info("Could not delete object with ID: " + pfObject.objectId + " ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var pfObject = //Retrieve a PFObject using PFQuery as in the example above
+
+// delete object Asynchronously
+pfObject.deleteObjectInBackground({
+    success: function(e) {
+        // event: nothing
+        Ti.API.info("Successfully deleted object with ID: " + pfObject.objectId);
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Could not delete object with ID: " + pfObject.objectId + " ErrorCode: " + e.errorCode + " Error: " + e.error);
+    }
+
+});
+</code></pre>
+<hr />
+<hr />
+<h2 id="updating-objects-and-users">Updating Objects and Users</h2>
+<p>To update the data stored in a PFObject or PFUser, just set/change the object fields using <code>pfObject.setObject()</code> or <code>pfUser.setObject()</code> and save them again with the new data. It's that simple. </p>
+<p>Update a User's password using the <code>pfUser.setPassword()</code> method. 
+Update a User's username or email using the <code>pfUser.setObject(newEmail, "email")</code> or <code>pfUser.setObject(newUsername, "username")</code>.</p>
+<p>Remember to call <code>save</code> or <code>saveInBackground</code> when you're done modifying the object's content so it can synchronize with Parse's servers.</p>
+<p>PFFile's can't be updated.</p>
+<hr />
+<hr />
+<h2 id="geopoints">GeoPoints</h2>
+<p>Please read the Parse documentation here: <a href="https://parse.com/docs/ios_guide#geo">GeoPoint Documentation</a></p>
+<p>And read the GeoPoint documentation for the Parse Module here: <a href="./pfgeopointreference.html">GeoPoint Reference</a></p>
+<p>Example:</p>
+<pre><code>var point = parseapi.PFGeoPointCreateGeoPointWithLatitudeAndLongitude( 40.0, -30.0 );
+placeObject.setObject( point, "location" );
+</code></pre>
+<hr />
+<hr />
+<h2 id="geoqueries">GeoQueries</h2>
+<p>Example:</p>
+<pre><code>// User's location
+var userGeoPoint = userObject.objectForKey("location");
+
+// Create a query for places
+var query = parseapi.PFQueryCreateQueryWithClassName("PlaceObject");
+
+// Interested in locations near user.
+query.whereKey({
+        key: "location",
+        nearGeoPoint: userGeoPoint
+});
+
+// Limit what could be a lot of points.
+query.limit = 10;
+
+var result = query.findObjects();
+var placesObjects = [];
+
+if( result.succeeded === true ) {
+    placesObjects = result.objects;
+}
+</code></pre>
+<hr />
+<hr />
+<h2 id="users">Users</h2>
+<p>Users are handled in a special way using the PFUser object. PFUser inherits all the functions from PFObject but also includes some extra functions to sign up and login/logout users. </p>
+<hr />
+<h3 id="during-login-or-sign-up-the-username-email-and-password-are-case-sensitive">During Login or Sign Up the username, email and password are CASE-SENSITIVE!</h3>
+<p><strong>IMPORTANT:</strong> The <code>username, email, password</code> when logging in or during sign up are now all CASE-SENSITIVE!! <strong>IT IS YOUR RESPONSIBILITY</strong> to convert the username and password to lowercase if you want to prevent the autocorrect on most phones that capitalize the first letter in a text field from messing up the signup and login process.</p>
+<hr />
+<h3 id="sign-up-a-new-user">Sign Up a New User</h3>
+<p>To signup a new user you need to first initialize the sign up process using the <code>pfUser.signUp( {} )</code> function with a <strong>username, password, and email</strong> argument. The <code>email</code> field is optional or you can pass <code>null</code> but the username and password are mandatory. After it's initialized you can add any other data just like a PFObject. In the example, we add that the user lives in <em>"New York"</em> under the "city" key using the <code>setObject( data, key )</code> function. After you're done adding data, you run the <code>pfUser.finishSignUp()</code> function to create the user in the database. </p>
+<p>After a new user is created, they will automatically be logged in.</p>
+<p>Example:</p>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var email = "example@test.com"; 
+var password = "test";
+
+// PFUser objects inherit all the methods of PFObject
+var pfUser = parseapi.createPFUser();   // first create a pfUser object
+
+// initialize the signup process with credentials
+pfUser.initSignUp( {
+                    username: email,
+                    password: password,
+                    email: email //the email field is optional
+                });
+
+// you can set objects just like PFObject before finishing the sign up process
+pfUser.setObject("New York", "city");
+
+// Synchronous sign up function, logs you in after it finishes
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = pfUser.finishSignUp();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully created a new user with id: " + pfUser.objectId);
+
+    var user = parseapi.PFUserCurrentUser();
+
+    Ti.API.info( "Logged In as: " + user.objectForKey("username") ); // show the logged in user
+
+} else {
+
+    Ti.API.info("Could not create new user. ErrorCode: " + result.errorCode + " Error: " + result.error);
+
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var email = "example@test.com";
+var password = "test";
+
+// PFUser objects inherit all the methods of PFObject
+var pfUser = parseapi.createPFUser();   // first create a pfUser object
+
+// initialize the signup process with credentials
+pfUser.initSignUp( {
+                    username: email,
+                    password: password,
+                    email: email
+                });
+
+// you can set objects just like PFObject before finishing the sign up process
+pfUser.setObject("New York", "city");
+
+// Asynchronous sign up function
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+pfUser.finishSignUpInBackground({
+    success: function(e) {
+        // event: nothing
+        Ti.API.info("Successfully created a new user with id: " + pfUser.objectId);
+
+        var user = parseapi.PFUserCurrentUser();
+
+        Ti.API.info( "Logged In as: " + user.objectForKey("username") ); // show the logged in user
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Could not create new user. ErrorCode: " + e.errorCode + " Error: " + e.error);
+
+    }
+
+});
+</code></pre>
+<hr />
+<h3 id="loginlogout-an-existing-user">Login/Logout an Existing User</h3>
+<p>To login a user you make a call to the <code>parseapi.PFUserLogin( { username: password: } )</code> function.</p>
+<p>To logout a user call the <code>parseapi.PFUserLogout()</code> function. </p>
+<p>The current user will be kept in the application's cache when you exit your application. This way you don't have to have the user login/out every time they open your app. But <strong>REMEMBER</strong> when you resume your application, the PFUser you obtain from <code>parseapi.PFUserCurrentUser()</code> is a cached version. So make sure to refresh it by calling <code>pfUser.refresh()</code> or <code>pfUser.refreshInBackground()</code>.</p>
+<p>Example:</p>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var user = "example@test.com";
+var pass = "test";
+
+//Synchronous User Login
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error, (PFUser or nil) user
+var result = parseapi.PFUserLogin( {
+                username: user,
+                password: pass
+                });
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully logged in!");
+
+    var user = result.user;
+
+    Ti.API.info( "Logged In as: " + user.objectForKey("username") ); // show the logged in user
+
+} else {
+
+    Ti.API.info("Could not login with credentials. ErrorCode: " + result.errorCode + " Error: " + result.error);
+
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var user = "example@test.com";
+var pass = "test";
+
+//Asynchronous User Login
+parseapi.PFUserLoginInBackground( {
+                username: user,
+                password: pass,
+
+                success: function(e) {
+                    // event: (PFObject) user
+
+                    Ti.API.info("Successfully logged in!");
+
+                    var user = e.user;
+
+                    Ti.API.info( "Logged In as: " + user.objectForKey("username") ); // show the logged in user
+
+                },
+                error: function(e) {
+
+                    Ti.API.info("Could not login with credentials. ErrorCode: " + e.errorCode + " Error: " + e.error);
+
+                }
+
+});
+</code></pre>
+<hr />
+<h3 id="obtaining-the-current-user-or-checking-if-a-user-is-logged-in">Obtaining the Current User or Checking If a User Is Logged In</h3>
+<p>To check if a user is logged in or to obtain the current PFUser object, make a call to the <code>parseapi.PFUserCurrentUser()</code> function.</p>
+<p>If this function returns null, it means there's no user logged in.</p>
+<p>Example:</p>
+<pre><code>var user = parseapi.PFUserCurrentUser();
+
+if( user != null )
+{
+    Ti.API.info( "Current Logged In User: \n" + user.objectForKey("username") ); 
+} else {
+    Ti.API.info( "No user logged in" ); 
+}
+</code></pre>
+<hr />
+<h3 id="refreshing-the-current-logged-in-pfuser-when-your-application-resumes-for-iphone-android">Refreshing the current logged in PFUser when your application resumes for iPhone &amp; Android</h3>
+<p>The current user will be kept in the application's cache when you exit your application. This way you don't have to have the user login/out every time they open your app. But <strong>REMEMBER</strong> when you resume your application, the PFUser you obtain from <code>parseapi.PFUserCurrentUser()</code> is a cached version. So make sure to refresh it by calling <code>pfUser.refresh()</code> or <code>pfUser.refreshInBackground()</code>.</p>
+<hr />
+<h3 id="updating-a-user-or-changing-data">Updating a User (or Changing Data)</h3>
+<p><strong>IMPORTANT:</strong> Remember to refresh the current user before saving or changing data. Just in case to prevent you from overwriting any data you might have saved using the REST API somewhere else.</p>
+<h4 id="updating-the-current-users-data">Updating The Current User's Data</h4>
+<p>Since the PFUser object inherits all the functions from PFObject, you can treat it like updating any PFObject.</p>
+<p>Example:</p>
+<pre><code>//get the current user
+var currentUser = parseapi.PFUserCurrentUser();
+
+if( currentUser != null )
+{
+    // Set the new data or change old data
+    currentUser.setObject("Dave", "firstName"); // change my name from David to Dave
+    currentUser.setObject("programmerdave", "nickname"); // add a nickname
+
+    // Then Save.
+    // Synchronous Save
+    // returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+    var result = currentUser.save();
+
+    if( result.succeeded ) {
+
+        Ti.API.info("Successfully saved data!");
+
+    } else {
+
+        Ti.API.info("Could not save data. ErrorCode: " + result.errorCode + " Error: " + result.error);
+    }
+}
+</code></pre>
+<h4 id="security-for-user-objectsupdating-other-users-data-you-cant">Security For User Objects/Updating Other User's Data (You Can't)</h4>
+<p>If you want to update data for a user that's currently not logged in, you can't. The parse api will let you read but not update a user that hasn't been authenticated by a login method. I'll let parse tell you more <a href="https://www.parse.com/docs/ios_guide#users-security">Parse PFUser Security</a></p>
+<pre><code>The PFUser class provides a layer of security that prevents altering objects that haven't been authenticated on the device.
+The policy is that you are not able to invoke any of the save or delete type methods unless the object was obtained using an authenticated method, like logIn or signUp. 
+This ensures that only the device that has authenticated the user via a username and password has the ability to alter that user.
+</code></pre>
+<p>You can however read other user's data by using a PFUser Query but the save and delete methods will not work. You can check if a user is authenticated on the device (meaning that you can save or delete it) by checking the <code>pfUser.isAuthenticated</code> property.</p>
+<hr />
+<h3 id="security-for-other-objectsaccess-control-lists">Security For Other Objects/Access Control Lists</h3>
+<p>For more information please see the <a href="https://parse.com/docs/ios_guide#users-acls">Parse iOS ACL Documentation</a></p>
+<p>Please look at the ACL documentation for this module to see which methods to use: <a href="./pfaclreference.html">PFACL Reference</a></p>
+<p>Examples:</p>
+<pre><code>var privateNote = parseapi.PFObjectCreateObjectWithClassName("Note");
+privateNote.setObject( "This note is private!", "content" );
+privateNote.ACL = parseapi.PFACLCreateACLWithUser( user );
+privateNote.save();
+</code></pre>
+<p>Permissions can also be granted on a per-user basis:</p>
+<pre><code>var groupMessage = parseapi.PFObjectCreateObjectWithClassName("Message");
+var groupACL = parseapi.PFACLCreateACL();
+
+for (var iter=0; iter &lt; userList.length; iter++) {
+    groupACL.setReadAccess( {
+        allowed: true,
+        forUser: userList[iter]
+    });
+
+    groupACL.setWriteAccess( {
+        allowed: true,
+        forUser: userList[iter]
+    });
+}
+
+groupMessage.ACL = groupACL;
+groupMessage.save();
+</code></pre>
+<p>You can also grant permissions to all users at once:</p>
+<pre><code>var publicPost = parseapi.PFObjectCreateObjectWithClassName("Post");
+var postACL = parseapi.PFACLCreateACLWithUser( user );
+postACL.setPublicReadAccessAllowed( true );
+publicPost.ACL = postACL;
+publicPost.save();
+</code></pre>
+<hr />
+<h3 id="querying-a-pfuser">Querying a PFUser</h3>
+<p><strong>IMPORTANT:</strong> You can't save or delete any updates to a user that has not been authenticated on the device. See the <code>Updating Other User's Data</code> section of this guide.</p>
+<p>To query for users, you need to use the special user query, <code>parseapi.PFQueryCreateQueryForUser()</code> that returns a query that can search for users. The objects returned from the query are PFObjects. </p>
+<pre><code>var userQuery = parseapi.PFQueryCreateQueryForUser();
+
+if( userQuery != null )
+{       
+    // now it works just like a normal query
+    userQuery.whereKey( {
+        key: "city",
+        equalTo: "New York"    // can be equalTo, greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo, notEqualTo
+    });
+
+    // Synchronous.
+    // returns (boolean)succeeded, (Array or null)objects, (integer or null)errorCode, (string or null)error
+    var result = userQuery.findObjects();
+
+    if( result.succeeded ) {
+
+        Ti.API.info("Successfully queried objects!");
+
+        // remember you can only read these user objects
+        var pfObjectUsers = result.objects;
+
+        if( pfObjectUsers.length &gt; 0 )
+        {
+            // The users here are PFObjects
+            var firstUser = pfObjectUsers[0];
+
+            // print username
+            Ti.API.info( "Username: " + firstUser.objectForKey("username") );
+        }
+
+    } else {
+
+        Ti.API.info("Could not query user objects. ErrorCode: " + result.errorCode + " Error: " + result.error);
+    }
+}
+</code></pre>
+<p>If you want to retrieve PFUser instead of PFObject, you can do so by calling <code>parseapi.PFQueryCreateUserObjectWithId( id )</code>.</p>
+<p>Example:</p>
+<pre><code>var result = parseapi.PFQueryCreateUserObjectWithId( "x1y2z345" );
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully got user object!");
+
+    // remember you can only read these user objects
+    var pfUser = result.user;
+
+    //do something with the user. Print the username
+    Ti.API.info( "Username: " + pfUser.objectForKey("username") );
+
+} else {
+
+    Ti.API.info("Could not get user. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>REMEMBER:</strong> These PFObjects and PFUsers are read only.</p>
+<hr />
+<h3 id="resetting-and-changing-passwords">Resetting and Changing Passwords</h3>
+<p>If the user forgets their password, you can call <code>parseapi.PFUserRequestPasswordResetForEmail( email )</code> or <code>parseapi.PFUserRequestPasswordResetForEmailInBackground</code>. More information for this is available here <a href="https://www.parse.com/docs/ios_guide#users-resetting">Parse Resetting Passwords</a></p>
+<h4 id="request-reset-password-example">Request Reset Password Example</h4>
+<p><strong>Synchronous:</strong></p>
+<pre><code>var email = "test@testing.com"
+
+//Synchronous Password Reset
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error, (PFUser or null) user
+var result = parseapi.PFUserRequestPasswordResetForEmail( email );
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully Requested Password Reset. Check your email.");
+
+} else {
+
+    Ti.API.info("Could not request password reset. ErrorCode: " + result.errorCode + " Error: " + result.error);
+
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>var email = "test@testing.com";
+
+//Asynchronous Password Reset
+parseapi.PFUserRequestPasswordResetForEmailInBackground( {
+        email: email,
+
+        success: function(e) {
+            // event: null
+
+            Ti.API.info("Successfully Requested Password Reset. Check your email.");
+
+        },
+        error: function(e) {
+            // event: (integer or null)errorCode, (string or null)error
+            Ti.API.info("Could not request password reset. ErrorCode: " + result.errorCode + " Error: " + result.error);
+
+        }
+
+});
+</code></pre>
+<h4 id="changing-passwords-example">Changing Passwords Example</h4>
+<p>If a user wants to change their password, first set the new password by calling <code>pfUser.setPassword</code> and then save the pfUser.</p>
+<pre><code>var currentUser = parseapi.PFUserCurrentUser();
+
+// First set the new password
+currentUser.setPassword( newpassword );
+
+// Then Save.
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = currentUser.save();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully changed password!");
+
+} else {
+
+    Ti.API.info("Could not save new password. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<hr />
+<hr />
+<h2 id="facebook-integration">Facebook Integration</h2>
+<h4 id="ios-only">iOS Only</h4>
+<p>More information about Parse's integration with the Facebook API can be found here <a href="https://www.parse.com/docs/ios_guide#fbusers">Facebook Users</a>.</p>
+<p>This module also has functions to access the Facebook API dialog and request functions. This is very similar to using the original facebook functions found in the Titanium SDK Facebook Module. </p>
+<p>If you use this library for your Facebook API there is no need to use Titanium's Facebook Module. </p>
+<p>More information about setting up your application to use the Facebook API can be found here <a href="https://developers.facebook.com/docs/mobile/ios/build">Facebook iOS Tutorial</a></p>
+<p><strong>IMPORTANT:</strong> Facebook Integration is currently only available on iOS.</p>
+<hr />
+<h3 id="setup-your-facebook-api-key">Setup your Facebook API key</h3>
+<p>From the <a href="https://developers.facebook.com/apps">Facebook Developer Pages</a>, put your facebook application id in the <code>facebookApplicationId</code> property when calling <code>parseapi.initParse</code>.</p>
+<p>Example:</p>
+<pre><code>var parseapi = require('com.forge42.parseapi');
+
+parseapi.initParse( {
+                    applicationId: "put your parse api APPLICATION ID here",
+                    clientKey: "put your parse api CLIENT KEY here",
+                    facebookApplicationId: "put your facebook application APP ID here"
+                });
+</code></pre>
+<p><strong>VERY IMPORTANT</strong>: You have to setup a custom URL Scheme for your iOS App for this module to work. </p>
+<hr />
+<h3 id="checking-if-your-application-has-a-facebook-application-id">Checking if your application has a Facebook Application Id</h3>
+<p>You might want to check if your application has registered a Facebook application id. This is an easy way to determine if your Facebook functions should run or not so you can easily disable and enable your Facebook implementation. This is useful for Android devices as the Parse API doesn't support Facebook on Android yet. So when it does support Android, you can just add the Facebook Application Id to your initParse method and you'll be set!</p>
+<p>Example:</p>
+<pre><code>// when we initialize, check if we are using Android or iOS
+var parseapi = require('com.forge42.parseapi');
+
+if (Titanium.Platform.name == 'android') 
+{
+    // Parse doesn't support the Facebook API on Android yet.
+
+    parseapi.initParse( {
+                            applicationId: "Place your Application Id Here",
+                            clientKey: "Place your Client Key Here"
+                        }); 
+} else {
+    // Parse Supports Facebook API on iOS
+    parseapi.initParse( {
+                            applicationId: "Place your Application Id Here",
+                            clientKey: "Place your Client Key Here",
+                            facebookApplicationId: "Place your Facebook Application Id Here"
+                        }); 
+}
+</code></pre>
+<p>Then when in your code, you can check if the Facebook application id was setup with the following property.</p>
+<p>Example:</p>
+<pre><code>if( parseapi.ParseHasFacebookApplicationId ) {
+    // Do something with facebook here
+}
+</code></pre>
+<p>All the examples in the included app.js use this</p>
+<hr />
+<h3 id="setting-up-your-custom-url-scheme-for-facebook-integration">Setting Up Your Custom URL Scheme for Facebook Integration</h3>
+<p>Follow these steps to add your custom url scheme for your facebook integration:</p>
+<ul>
+<li>
+<p>Step 1) Setup this Parse Module and Run your application once in the iphone simulator.<br />
+</p>
+</li>
+<li>
+<p>Step 2) Go into the newly created folder <code>(YOUR PROJECT DIRECTORY)/build/iphone</code> and copy your <code>Info.plist</code> file into your root project directory <code>(YOUR PROJECT DIRECTORY)</code>. This will let Titanium know you're using a custom <code>Info.plist</code> file. (Don't worry about updating the file. Titanium will do it's best to change what it needs in your custom.plist file without overwriting your changes.)<br />
+</p>
+</li>
+<li>
+<p>Step 3) Now open up Info.plist in a text editor of your choice.<br />
+</p>
+</li>
+<li>
+<p>Step 4) Do a search for the <code>CFBundleURLSchemes</code> key. Now do either of the following steps.</p>
+</li>
+</ul>
+<p><strong>I have the CFBundleURLSchemes key</strong></p>
+<ul>
+<li>Step 5) Add a new string property with your Facebook App ID prefixed by <code>fb</code>. Then go to step 6. Example: <code>&lt;string&gt;fb1234567890&lt;/string&gt;</code></li>
+</ul>
+<p><strong>I don't have the CFBundleURLSchemes key</strong></p>
+<ul>
+<li>
+<p>Step 5) Add the following lines in the <code>Info.plist</code>. Remember to replace <code>com.mycompany.myapplication</code> with your own. Then go to step 6. (Hint: Add these lines inside the <code>&lt;dict&gt;&lt;/dict&gt;</code> after <code>&lt;plist version="1.0"&gt;</code>)</p>
+<pre><code>&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;CFBundleURLName&lt;/key&gt;
+        &lt;string&gt;com.mycompany.myapplication&lt;/string&gt;
+        &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+        &lt;array&gt;
+            &lt;string&gt;fb1234567890&lt;/string&gt;
+        &lt;/array&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+</li>
+<li>
+<p>Step 6) Save the file. Make sure it's in your Project Root Directory. This process makes titanium use a custom Info.plist file. Titanium will do it's best to try and update your keys but if you run into any problems, delete the custom Info.plist file, clean and build your project, and repeat these steps.</p>
+</li>
+</ul>
+<hr />
+<h3 id="facebook-login-sign-up">Facebook Login / Sign Up</h3>
+<p>To login or sign up a user you can only call the Asynchronous function <code>parseapi.PFUserLogInWithFacebookInBackground</code>. It takes a permissions array of strings. These permissions can be found here: <a href="https://developers.facebook.com/docs/reference/api/permissions/">Facebook API Permissions</a></p>
+<p>The user will be presented with a Facebook Login or Sign Up Screen to authorize your application.</p>
+<p>The current user will be kept in the application's cache when you exit your application. This way you don't have to have the user login/out every time they open your app. But <strong>REMEMBER</strong> when you resume your application, the PFUser you obtain from <code>parseapi.PFUserCurrentUser()</code> is a cached version. So make sure to refresh it by calling <code>pfUser.refresh()</code> or <code>pfUser.refreshInBackground()</code>.</p>
+<p>Also the only way you can find out if the user is new is by checking the <code>pfUser.isNew</code> property like it shows in the example, otherwise the user isn't new and just logged in.</p>
+<p>Example:</p>
+<pre><code>var permissions = new Array("");
+
+// Asynchronous facebook sign up/login function
+parseapi.PFUserLogInWithFacebookInBackground({
+    permissions: permissions,
+    success: function(e) {
+        // event: (PFUser)user
+
+        var pfUser = e.user;
+
+        if( pfUser.isNew )
+        {
+            Ti.API.info("Successfully created a new user with facebook id: " + pfUser.facebookId);
+        }
+        else
+        {               
+            Ti.API.info("Logged in with facebook id: " + pfUser.facebookId);
+        }
+
+        test_button_array[9].title = "PFUser Logout";
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        if( e.errorCode == parseapi.kParseErrorFacebookLoginCancelled ) {
+            Ti.API.info(e.error); // user cancelled error message
+        }
+        else {
+
+            Ti.API.info("Could not create new user. ErrorCode: " + e.errorCode + " Error: " + e.error);
+        }
+    }
+
+});
+</code></pre>
+<hr />
+<h3 id="facebook-link-and-unlink-to-existing-pfuser">Facebook Link and Unlink to existing PFUser</h3>
+<p>To link a Facebook Account with an existing PFUser you can only call the Asynchronous function <code>pfUser.linkToFacebookInBackground</code>. </p>
+<p>It takes a permissions array of strings. These permissions can be found here: <a href="https://developers.facebook.com/docs/reference/api/permissions/">Facebook API Permissions</a></p>
+<p>The user will be presented with a Facebook Login or Sign Up Screen to authorize your application and after it succeeds, the user can now use his Facebook account with the account he registered manually beforehand. The user can also now login through his Facebook account as well for the same user account.</p>
+<h4 id="link-example">Link Example</h4>
+<pre><code>var permissions = new Array("");
+var user = parseapi.PFUserCurrentUser();
+
+if( user == null )
+{
+    Ti.API.info("No User Currently Logged In");
+    return;
+}
+
+if( user.hasFacebook )
+{
+    Ti.API.info("User already has a linked facebook account");
+    return;
+}
+
+// Only Asynchronous
+user.linkToFacebookInBackground({
+    permissions: permissions,
+    success: function(e) {
+        // event: null
+
+        var pfUser = parseapi.PFUserCurrentUser();
+
+        Ti.API.info("Successfully Linked Account! User Facebook Id: " + pfUser.facebookId);
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        if( e.errorCode == parseapi.kParseErrorFacebookLoginCancelled ) {
+            Ti.API.info(e.error);
+        }
+        else {
+
+            Ti.API.info("Could not link with Facebook Account! ErrorCode: " + e.errorCode + " Error: " + e.error);
+        }
+    }
+
+});
+</code></pre>
+<h4 id="unlink-example">Unlink Example</h4>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>// Asynchronous Unlink
+user.unlinkFromFacebookInBackground({
+
+    success: function(e) {
+        // event: Null
+
+        Ti.API.info("Success: The user is no longer associated with their Facebook account.");
+
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Could not unlink account! ErrorCode: " + e.errorCode + " Error: " + e.error);
+    }
+
+});
+</code></pre>
+<p><strong>Synchronous:</strong></p>
+<pre><code>// Synchronous Unlink
+var result = user.unlinkFromFacebook();
+
+// Synchronous.
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+if( result.succeeded ) {
+
+    Ti.API.info("Success: The user is no longer associated with their Facebook account.");
+
+} else {
+
+    Ti.API.info("Could not unlink account! ErrorCode: " + e.errorCode + " Error: " + e.error);
+}
+</code></pre>
+<hr />
+<h3 id="facebook-session-expiration-and-how-to-avoid-it">Facebook session expiration and how to avoid it</h3>
+<p>There is a finite time before the facebook session expires so you have to check if the facebook session expired before running any facebook calls. Also if you close your app and come back in later, you might still be logged in with a PFUser but the facebook session might have expired or not be valid. You can use the <code>parseapi.FacebookSessionIsValid</code> property to check if the session is expired. If it is expired, you can make the user login again through facebook or log the user out. When the facebook session expires, you will still be able to see the current logged in user when calling <code>PFUserCurrentUser</code> so checking if the user is logged in is not enough. So make sure to check if the session is valid.</p>
+<p>A way around this is to use the <code>offline_access</code> permission in <code>parseapi.PFUserLogInWithFacebookInBackground</code>. This will give you an infinite expiry time and you won't have to authorize the user again. You can read more about this in the <a href="https://developers.facebook.com/docs/authentication/">Facebook Authentication Page</a> or the <a href="https://developers.facebook.com/docs/reference/api/permissions/">Facebook Permissions Page</a></p>
+<hr />
+<h3 id="doing-more-with-the-facebook-api">Doing more with the Facebook API</h3>
+<p>Functions are available to access the <a href="https://developers.facebook.com/docs/reference/api/">Facebook Graph API</a> or the deprecated <a href="https://developers.facebook.com/docs/reference/rest/">Facebook REST API</a>. More information available here <a href="https://developers.facebook.com/docs/reference/iossdk/request/">Facebook Request iOS Documentation</a></p>
+<p>There are also functions for using <a href="https://developers.facebook.com/docs/reference/dialogs/">Facebook Dialogs</a>.</p>
+<p>The following functions are extremely similar to the Titanium Facebook functions so you should be familiar with them if you've used the Facebook API. Also you should be able to port your existing code without a problem. (The following are examples used by the <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.Facebook-module">Facebook Titanium Examples</a> with some slight modifications to be used with the parseapi).</p>
+<p><strong>IMPORTANT:</strong> These functions assume that you're logged in, otherwise they will fail and return an error. Sorry but these functions do not return an errorCode. Since these functions do not return an error code, make sure to check if you're logged in with the <code>parseapi.PFUserCurrentUser()</code> and check that the user's Facebook session is still valid by checking <code>parseapi.FacebookSessionIsValid</code> before calling any of the following facebook functions. If the user is not logged in or the facebook session is not valid, you'll have to make the user login again by calling the <code>parseapi.PFUserLoginWithFacebookInBackground()</code>.</p>
+<p>Examples:</p>
+<h4 id="simple-graph-api-call">Simple Graph API Call</h4>
+<pre><code>parseapi.FacebookRequestWithGraphPath('me', {}, 'GET', function(e) {
+
+    if (e.success) {
+        Ti.API.info(e.result);
+
+    } else if (e.error) {
+        Ti.API.info(e.error);
+
+    } else {
+        Ti.API.info('Unknown response');
+    }
+
+});
+</code></pre>
+<h4 id="create-an-event-with-graph-api">Create an Event with GRAPH API</h4>
+<p>(<a href="http://developers.facebook.com/docs/reference/api/event/">More Facebook Info on Events</a>)</p>
+<pre><code>// First make sure this permission exists
+
+var permissions = new Array("create_event");
+
+parseapi.PFUserLogInWithFacebookInBackground({
+    permissions: permissions,
+    success: function(e) {},
+    error: function(e) {}
+};
+
+// ...
+// ...
+
+// Now create the event after you've confirmed authorize() was successful.
+var starttime = new Date(2012, 4, 31, 17, 0);
+var endtime = new Date(2012, 4, 31, 19, 0);
+var title = "Parse Module for Titanium Testing";
+var description = "What a great module!";
+var data = {
+    start_time: JSON.stringify(starttime), // API expects a JSON stringified date
+    end_time: JSON.stringify(endtime),
+    description: description,
+    name: title
+};
+
+parseapi.FacebookRequestWithGraphPath('me/events', data, 'POST', function(e) {
+    if (e.success) {
+        Ti.API.info("Success! Returned from FB: " + e.result);
+    } else {
+        if (e.error) {
+            Ti.API.info(e.error);
+        } else {
+            Ti.API.info("Unknown result");
+        }
+    }
+});
+</code></pre>
+<h4 id="set-users-facebook-status-with-graph-api">Set user's Facebook status with Graph API</h4>
+<p>(<a href="https://developers.facebook.com/docs/reference/api/status/">More Facebook Info on User Status Message</a>)</p>
+<pre><code>// First make sure this permission exists
+
+var permissions = new Array("publish_stream");
+
+parseapi.PFUserLogInWithFacebookInBackground({
+    permissions: permissions,
+    success: function(e) {},
+    error: function(e) {}
+};
+
+// ...
+// ...
+
+parseapi.FacebookRequestWithGraphPath('me/feed', {message: "Trying out FB Graph API and it's fun!"}, "POST", function(e) {
+    if (e.success) {
+        Ti.API.info("Success!  From FB: " + e.result);
+    } else {
+        if (e.error) {
+            Ti.API.info(e.error);
+        } else {
+            Ti.API.info("Unkown result");
+        }
+    }
+});
+</code></pre>
+<h4 id="post-a-photo-using-the-graph-api">Post a photo using the Graph API</h4>
+<p>(<a href="https://developers.facebook.com/docs/reference/api/photo/">More Facebook Info on Uploading Photos</a>)</p>
+<pre><code>// First make sure this permission exists
+
+var permissions = new Array("publish_stream");
+
+parseapi.PFUserLogInWithFacebookInBackground({
+    permissions: permissions,
+    success: function(e) {},
+    error: function(e) {}
+};
+
+// ...
+// ...
+
+var f = Ti.Filesystem.getFile('pumpkin.jpg');
+var blob = f.read();
+var data = {
+    message: 'This is a pumpkin',
+    picture: blob
+};
+
+parseapi.FacebookRequestWithGraphPath('me/photos', data, 'POST', function(e){
+    if (e.success) {
+        Ti.API.info("Success!  From FB: " + e.result);
+    } else {
+        if (e.error) {
+            Ti.API.info(e.error);
+        } else {
+            Ti.API.info("Unkown result");
+        }
+    }
+});
+</code></pre>
+<h4 id="post-a-photo-using-the-deprecated-rest-api">Post a photo using the deprecated REST API</h4>
+<p>(<a href="https://developers.facebook.com/docs/reference/api/photo/">More Facebook Info on Uploading Photos</a>)</p>
+<pre><code>// First make sure this permission exists
+
+var permissions = new Array("publish_stream");
+
+parseapi.PFUserLogInWithFacebookInBackground({
+    permissions: permissions,
+    success: function(e) {},
+    error: function(e) {}
+};
+
+// ...
+// ...
+
+var f = Ti.Filesystem.getFile('pumpkin.jpg');
+var blob = f.read();
+var data = {
+    caption: 'This is a pumpkin',
+    picture: blob
+};
+
+parseapi.FacebookRequest('photos.upload', data, function(e){
+    if (e.success) {
+        Ti.API.info("Success!  From FB: " + e.result);
+    } else {
+        if (e.error) {
+            Ti.API.info(e.error);
+        } else {
+            Ti.API.info("Unkown result");
+        }
+    }
+});
+</code></pre>
+<h4 id="show-the-facebook-feed-dialog">Show the Facebook Feed Dialog</h4>
+<p>(<a href="https://developers.facebook.com/docs/reference/dialogs/feed/">More Facebook Info on the Feed Dialog</a>)</p>
+<pre><code>var data = {
+    link: "http://www.appcelerator.com",
+    name: "Appcelerator Titanium Mobile",
+    message: "Checkout this cool open source project for creating mobile apps",
+    caption: "Appcelerator Titanium Mobile",
+    picture: "http://developer.appcelerator.com/assets/img/DEV_titmobile_image.png",
+    description: "You've got the ideas, now you've got the power. Titanium translates your hard won web skills into native applications..."
+};
+
+parseapi.FacebookDialog("feed", data, function(e) {
+    if (e.success) {
+        Ti.API.info("Success!  From FB: " + e.result);
+    } else {
+        if (e.error) {
+            Ti.API.info(e.error);
+        } else if (e.cancelled) {
+            Ti.API.info('Cancelled');
+        } else {
+            Ti.API.info("Unkown result");
+        }
+    }
+});
+</code></pre>
+<hr />
+<hr />
+<h2 id="pffile-guide">PFFile Guide</h2>
+<h3 id="storing-files-and-images">Storing Files and Images</h3>
+<p>PFFile lets you store application files in the cloud that would otherwise be too large or cumbersome to fit into a regular PFObject. The most common use case is storing images but you can also use it for documents, videos, music, and any other binary data.</p>
+<p>You can find more information about PFFiles here in the <a href="https://www.parse.com/docs/ios_guide#files">Parse.com iOS PFFiles Section</a></p>
+<ul>
+<li>
+<p>You can only store Titanium Blobs in a PFFile. </p>
+</li>
+<li>
+<p>You don't need to worry about filename collisions. Each upload gets a unique identifier so there's no problem with uploading multiple files named resume.txt.</p>
+</li>
+<li>
+<p>It's important that you give a name to the file that has a file extension. This lets Parse figure out the file type and handle it accordingly. So, if you're storing PNG images, make sure your filename ends with .png.</p>
+</li>
+</ul>
+<h4 id="example-for-storing-files">Example for storing files:</h4>
+<p><strong>Synchronous:</strong></p>
+<pre><code>// Load a file and convert it to a blob
+var file = Ti.Filesystem.getFile('resume.txt');
+var blob = file.read(); // you can also use f.toBlob();
+
+// New PFFile with name and data
+var pfFile = parseapi.PFFileCreateFileWithNameAndData( {
+    name: "resume.txt",
+    data: blob 
+});
+
+// Save File Synchronously.
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = pfFile.save();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully saved file: " + pfFile.name );
+
+    Ti.API.info("Created Object URL: " + pfFile.url);
+} else {
+
+    Ti.API.info("Could not save object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+
+// Now save this file in a PFObject
+
+// New PFObject
+var pfObject = parseapi.PFObjectCreateObjectWithClassName("TestObjectWithFile");
+
+pfObject.setObject("resume.txt", "name");
+
+pfObject.setObject(pfFile, "savedFile");
+
+// save pfObject
+result = pfObject.save();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully saved object!");
+
+} else {
+
+    Ti.API.info("Could not save object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>Asynchronous:</strong></p>
+<pre><code>// Load a file and convert it to a blob
+var file = Ti.Filesystem.getFile('resume.txt');
+var blob = file.read(); // you can also use f.toBlob();
+
+// New PFFile with name and data
+var pfFile = parseapi.PFFileCreateFileWithNameAndData( {
+    name: "resume.txt",
+    data: blob 
+});
+
+// Save File Asynchronously.
+pfFile.saveInBackground( {
+
+    success: function(e) {
+        // event: nothing
+
+        Ti.API.info("Successfully saved file: " + pfFile.name );
+
+        Ti.API.info("Created Object URL: " + pfFile.url);
+
+        // New PFObject
+        var pfObject = parseapi.PFObjectCreateObjectWithClassName("TestObjectWithFile");
+
+        // Text, numbers
+        pfObject.setObject("resume.txt", "name");
+
+        pfObject.setObject(pfFile, "savedFile");
+
+        // save pfObject
+        result = pfObject.save();
+
+        if( result.succeeded ) {
+
+            Ti.API.info("Successfully saved object!");
+
+        } else {
+
+            Ti.API.info("Could not save object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+        }
+    },
+
+    error: function(e) {
+        // event: (integer or null)errorCode, (string or null)error
+
+        Ti.API.info("Error: " + JSON.stringify(e));
+    }
+});
+</code></pre>
+<h4 id="example-for-storing-images">Example for storing images:</h4>
+<p>Storing images is basically the same as storing files except that there are some minor issues outlined in the next section below. You can find an example of storing images in the <code>example/app.js</code> file in this module.</p>
+<hr />
+<h3 id="issues-with-storing-images-and-how-you-can-resolve-them">Issues with storing images and how you can resolve them.</h3>
+<p>There is a slight issue with the way Titanium stores it's TiBlob data type for images. On iOS, if an image is stored to a TiBlob, it will always return a JPEG representation of the image, even if the image was a png file. On Android, it will always return a PNG representation. This only affects us when we try to store an image to a Parse PFFile object. If the user chooses an image from the gallery or the camera, these limitations are imposed by the current release of the Titanium Mobile SDK. </p>
+<p>Therefore, to provide you with more choices, I have implemented the <code>parseapi.setDefaultTiBlobImageRepresentation( parseapi.kTiBlobImageDefaultPNG )</code> global function. Where you can either pass <code>parseapi.kTiBlobImageDefaultPNG</code> or <code>parseapi.kTiBlobImageDefaultJPEG</code> as the argument to set the default way images are stored in a PFFile if the TiBlob was not loaded directly from a TiFile. <strong>The default global setting for storing TiBlob Images in all PFFiles is <code>parseapi.kTiBlobImageDefaultPNG</code>, so just make sure you know this when uploading images that you didn't directly load from a TiFile.</strong></p>
+<p><strong>REMEMBER:</strong> This isn't a problem if you use a TiFile and convert it to a TiBlob data type by using <code>myfile.toBlob()</code> or <code>myFile.read()</code> in your javascript. In this case, the data for your image will be stored correctly in whatever format the file is stored in.</p>
+<p><strong>IMPORTANT:</strong> If you're not sure that a TiBlob image you're using will be saved with <code>parseapi.setDefaultTiBlobImageRepresentation()</code>, I have implemented the <code>parseapi.willTiBlobBeSavedWithDefaultImageRepresentation( TiBlob )</code> function which checks your TiBlob and returns a boolean value. You can also use <code>parseapi.getDefaultTiBlobImageRepresentation()</code> which will return either <code>parseapi.kTiBlobImageDefaultPNG</code> or <code>parseapi.kTiBlobImageDefaultJPEG</code>.</p>
+<p><strong>IMPORTANT:</strong> If you try to save a TiFile, you will get the following error: <code>TiFile is not a supported data type. Please use myfile.toBlob() to provide a TiBlob data type. Storing as empty data.</code> and the PFFile will be saved as an empty file. So remember to use <code>myfile.toBlob()</code> or <code>myFile.read()</code> in your javascript before saving the data in a PFFile. We only accept the TiBlob datatype.</p>
+<hr />
+<h3 id="retrieving-files">Retrieving Files</h3>
+<p>To retrieve a file, you can query the object you saved the file in and then call <code>pfFile.getData()</code> or <code>pfFile.getDataInBackground()</code> which will download the file from the server and return a TiBlob.</p>
+<p>Example:</p>
+<pre><code>// Get a specific object with a query
+var result = parseapi.PFQueryCreateObjectOfClassAndId( {
+        objectClass: "TestObjectWithFile",
+        objectId: "0123456789" 
+});
+
+if( result.succeeded )
+{
+    var pfObject = result.object;
+
+    var pfFile = pfObject.objectForKey("savedFile");
+
+    if( pfFile != null )
+    {
+        var result = pfFile.getData();
+
+        if( result.succeeded ) {
+            Ti.API.info("Got data for file: " + pfFile.name);
+        }
+        else {
+            Ti.API.info("Could not get data for File. ErrorCode: " + result.errorCode + " Error: " + result.error);
+
+        }
+    }
+    else
+    {
+        Ti.API.info("Object has no saved file");
+    }
+} else {
+    Ti.API.info("Could not find object");
+
+}
+</code></pre>
+<hr />
+<hr />
+<h2 id="relational-data-and-user-associations">Relational Data and User Associations</h2>
+<p>This module supports all the associations shown in the <a href="https://www.parse.com/docs/ios_guide#objects-pointers">Parse.com Relational Data Section</a> and <a href="https://www.parse.com/docs/ios_guide#users-associations">Parse.com User Associations Section</a> of their iOS Guide.</p>
+<h3 id="pfobjects-associations-example">PFObjects Associations Example:</h3>
+<pre><code>//PFObject Associations example
+var post = parseapi.PFObjectCreateObjectWithClassName("Post");
+
+post.setObject("This Parse Module is Great!", "name");
+
+var result = post.save(); // save the post, then change the title and let the comment save both of these objects
+
+var comment = parseapi.PFObjectCreateObjectWithClassName("Comment");
+
+comment.setObject("awesome!", "comment");
+
+comment.setObject(post, "post");
+
+post.setObject("I have comments now!", "name");
+post.setObject("I have content too!", "content");
+
+//asynchronous
+comment.saveInBackground( {
+
+             success: function(e) {
+                Ti.API.info("Success: " + JSON.stringify(e));
+            },
+            error: function(e) {
+                Ti.API.info("Error: " + JSON.stringify(e));
+            }
+
+        });
+</code></pre>
+<h3 id="pfuser-associations-example">PFUser Associations Example:</h3>
+<pre><code>var user = parseapi.PFUserCurrentUser();
+
+if( user == null ) {
+    alert("No User Logged In!");
+
+    return;
+}
+
+//User Associations example
+var post = parseapi.PFObjectCreateObjectWithClassName("Post");
+
+post.setObject("How are you " + user.objectForKey("username") + "!", "name");
+post.setObject(user, "user");
+
+//synchronous
+var result = post.save();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully saved object!");
+
+} else {
+
+    Ti.API.info("Could not save object. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<h3 id="retrieve-pfuser-associations-example">Retrieve PFUser Associations Example:</h3>
+<p>You can apply this same idea to retrieving PFObjects.</p>
+<pre><code>var user = parseapi.PFUserCurrentUser();
+
+if( user == null ) {
+    alert("No User Logged In!");
+
+    return;
+}
+
+// Find all posts by the current user
+var pfQuery = parseapi.PFQueryCreateQueryWithClassName("Post");
+
+pfQuery.whereKey( {
+    key: "user",
+    equalTo: user
+});
+
+// Synchronous.
+// returns (boolean)succeeded, (Array or null)objects, (integer or null)errorCode, (string or null)error
+var result = pfQuery.findObjects();
+
+if( result.succeeded ) {
+
+    Ti.API.info("Successfully queried objects!");
+
+    var pfObjects = result.objects;
+
+    Ti.API.info("Query returned " + pfObjects.length + " PFObjects");
+
+} else {
+
+    Ti.API.info("Could not query objects. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<hr />
+<hr />
+<h2 id="ios-push-notifications">iOS Push Notifications</h2>
+<p><strong>REMEMBER:</strong> Receiving push notifications for iOS doesn't work in the simulator! But you can send push notifications in the simulator :)</p>
+<h3 id="setting-up-certificates-keys-and-provisioning-profile">Setting up Certificates, Keys and Provisioning Profile</h3>
+<p>Please visit the <a href="https://www.parse.com/docs/ios_guide#push-certificates">Parse iOS Guide for Push Notifications</a> to find out how to set this up.</p>
+<hr />
+<h3 id="integrating-parse-ios-push-notifications-with-titanium">Integrating Parse iOS Push Notifications with Titanium</h3>
+<p>After you setup your iOS Certificates, Keys, and Provisioning Profile, you can add the following lines of code to your application to register for push notifications:</p>
+<pre><code>// iOS Push Notifications
+Ti.Network.registerForPushNotifications({
+    types:[
+        Ti.Network.NOTIFICATION_TYPE_BADGE,
+        Ti.Network.NOTIFICATION_TYPE_ALERT,
+        Ti.Network.NOTIFICATION_TYPE_SOUND
+    ],
+    success: function(e) {
+        var token = e.deviceToken;
+
+        // register the parse api to receive notifications
+        parseapi.ParseiOSPushStoreDeviceToken( token );
+
+        // Synchronous
+        // subscribe to global channel
+        var result = parseapi.ParseiOSPushSubscribeToChannel("");
+
+        if( result.succeeded == false )
+        {
+            alert("Could not subscribe to global push notifications channel");
+        }
+    },
+    error: function(e) {
+        alert("iOS Register For Push Notifications Error: " + e.error);
+    },
+    callback: function(e) {
+        var data = e.data;
+
+        // Let parse handle the in app push notifications
+        // this function will show the user an alert dialog and make an alert sound
+        parseapi.ParseiOSPushHandlePush(data);
+    }
+});
+</code></pre>
+<hr />
+<h3 id="using-ios-push-notifications">Using iOS Push Notifications</h3>
+<p>This module wraps the function calls that the Parse API makes available through it's SDK. So by looking at this <a href="./parsemodulereference.html">Parse Module Reference</a> and Parse's Documentation on <a href="https://www.parse.com/docs/ios_guide#push">Parse.com iOS Push Notifications</a>, you should be able to use their documentation to do anything with push notifications. There are other methods such as subscribing, unsubscribing, retrieving different channels which you can find the the Parse Module Reference.</p>
+<p>Here is a simple example where a device sends a message to the global push notification channel synchronously. It shouldn't be hard to use this example and the coding patterns in this guide to write other Push Notification code.</p>
+<p>Example:</p>
+<pre><code>// Synchronous
+// Send Push Message to Global Channel
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = parseapi.ParseiOSPushSendPushMessageToChannel( {
+                                                                channel: "", // global channel
+                                                                message: "Client Sent Everyone this Message!" 
+                                                            });
+
+if( result.succeeded ) {
+
+    alert("Successfully sent Push Notification message.");
+
+} else {
+
+    alert("Could not send Push Notification message. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p>Here's another example of how to send data. You can send the following properties <strong>alert, badge, and sound</strong> which are described in <a href="http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html#//apple_ref/doc/uid/TP40008194-CH100-SW1">Apple's documentation</a> but you can also send custom properties.</p>
+<pre><code>var myData = {  
+            alert: "Hello everyone!",
+            badge: 3,
+            sound: "default",
+            customFlag: true
+          };
+// Synchronous
+// Send Push Data to Global Channel
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = parseapi.ParseiOSPushSendPushDataToChannel( {
+
+                                        channel: "", // global channel
+                                        data: myData
+                                                            });
+
+if( result.succeeded ) {
+
+    alert("Successfully sent Push Notification message.");
+
+} else {
+
+    alert("Could not send Push Notification message. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p>You can retrieve these messages in the <code>Ti.Network.registerForPushNotifications</code> callback function or just let Parse Handle it with <code>parseapi.ParseiOSPushHandlePush(data);</code></p>
+<p>Example:</p>
+<pre><code>Ti.Network.registerForPushNotifications({
+
+    //....other callbacks .... etc....
+
+    callback: function(e) {
+        var data = e.data;
+
+        if( data.customFlag == true )
+        {
+            alert("You set the custom flag!!!!");
+        }
+        else
+        {
+            alert(data.alert);
+        }
+
+        // Or Let parse handle the in app push notifications
+        // this function will show the user an alert dialog and make an alert sound
+        //parseapi.ParseiOSPushHandlePush(data);
+    }
+});
+</code></pre>
+<hr />
+<hr />
+<h2 id="android-push-notifications">Android Push Notifications</h2>
+<h3 id="setting-up-android-notifications">Setting up Android Notifications</h3>
+<p>Please visit the <a href="https://www.parse.com/docs/ios_guide#push-certificates">Parse Android Guide for Push Notifications</a> to find out how to set this up.</p>
+<p>Here's a quick way to get setup. Just put this in your <code>tiapp.xml</code> inside <android></android>. So your file should look like this:</p>
+<pre><code>&lt;android xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+    &lt;manifest&gt;
+        &lt;application&gt;
+            &lt;service android:name="com.parse.PushService" /&gt;
+            &lt;receiver android:name="com.parse.ParseBroadcastReceiver"&gt;
+              &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.BOOT_COMPLETED" /&gt;
+                &lt;action android:name="android.intent.action.USER_PRESENT" /&gt;
+              &lt;/intent-filter&gt;
+            &lt;/receiver&gt;
+        &lt;/application&gt;
+        &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+        &lt;uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /&gt;
+        &lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
+    &lt;/manifest&gt;
+&lt;/android&gt;
+</code></pre>
+<hr />
+<h3 id="integrating-parse-android-push-notifications-with-titanium">Integrating Parse Android Push Notifications with Titanium</h3>
+<p>After you setup your tiapp.xml, you can add the following lines of code to your application to register for push notifications:</p>
+<pre><code>// for this to work, you have to use the root activity. 
+// The windows you open cannot be heavyweight windows so that the root activity stays active.
+
+currentActivity = Ti.Android.currentActivity;
+
+parseapi.ParseAndroidPushSubscribeWithActivity("", currentActivity);
+
+// Check if the user touched a notification in the status bar when launching this activity
+currentActivity.addEventListener('create', function(e) {
+    // check when it's created
+    var intent = currentActivity.getIntent();
+
+    if( intent.hasExtra("com.parse.Channel") &amp;&amp; intent.hasExtra("com.parse.Data") ) {
+        var channel = intent.getStringExtra("com.parse.Channel");
+        var data = JSON.parse( intent.getStringExtra("com.parse.Data") );
+
+        // process your android push notification here
+
+        Ti.API.info("User touched push notification!");
+        alert("Status Bar Notification Touched:\n" + JSON.stringify(data));
+
+        // clear all the other notifications in the status bar 
+        // so that the user can't click on them anymore.
+        parseapi.ParseAndroidPushClearAllNotifications();
+    }
+});
+
+//this action is used to provide in app notifications 
+//The action should be your reverse domain and an action name: com.yourdomain.yourappname.youraction
+parseapi.ParseAndroidPushSetupDefaultActionReceiver("com.lithiumllama.parsefacebooktest.HANDLEP", function (e) {
+    var intent = e.intent;
+    if( intent.hasExtra("com.parse.Channel") &amp;&amp; intent.hasExtra("com.parse.Data") ) {
+        var channel = intent.getStringExtra("com.parse.Channel");
+        var data = JSON.parse( intent.getStringExtra("com.parse.Data") );
+
+        // process your android push notification here
+        Ti.API.info("Got Push Notification In Default Action Receiver!");
+        alert("Running App Notification:\n" + JSON.stringify(data));
+
+        // clear all the other notifications in the status bar 
+        // so that the user can't click on them anymore.
+        parseapi.ParseAndroidPushClearAllNotifications();
+    }
+});
+</code></pre>
+<p>You should also make sure to register and unregister the default action receiver if you want to use in app notifications:</p>
+<pre><code>currentActivity.addEventListener('resume', function(e) {
+    Ti.API.info("Resumed Android App");
+    parseapi.ParseAndroidPushRegisterDefaultActionReceiver();
+});
+
+currentActivity.addEventListener('pause', function(e) {
+    Ti.API.info("Paused Android App");
+    parseapi.ParseAndroidPushUnregisterDefaultActionReceiver();
+});
+</code></pre>
+<hr />
+<h3 id="using-android-push-notifications">Using Android Push Notifications</h3>
+<p>This module wraps the function calls that the Parse API makes available through it's SDK. So by looking at this <a href="./parsemodulereference.html">Parse Module Reference</a> and Parse's Documentation on <a href="https://parse.com/docs/android_guide#push">Parse.com Android Push Notifications</a>, you should be able to use their documentation to do anything with push notifications. There are other methods such as subscribing, unsubscribing, retrieving different channels which you can find the the Parse Module Reference.</p>
+<p>Here is a simple example where a device sends a message to the global push notification channel synchronously. It shouldn't be hard to use this example and the coding patterns in this guide to write other Push Notification code.</p>
+<p>Example:</p>
+<pre><code>// Synchronous
+// Send Push Message to Global Channel
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = parseapi.ParseAndroidPushSendPushMessageToChannel( {
+                                                                channel: "", // global channel
+                                                                message: "Android Client Sent Everyone this Message!" 
+                                                            });
+
+if( result.succeeded ) {
+
+    alert("Successfully sent Push Notification message.");
+
+} else {
+
+    alert("Could not send Push Notification message. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p>Here's another example of how to send data. You can send the following properties <strong>alert, title, action</strong> which are described in Parse's Android Push Notifications but you can also send custom properties. If you send the <code>action</code> property and it has the same name as the default action receiver you setup earlier, you can have in-app notifications.</p>
+<pre><code>var myData = {  
+            alert: "Android Client Sent Everyone this Message!", 
+            action: "com.lithiumllama.parsefacebooktest.HANDLEP",
+            title: "Parse Push Notification"
+          };
+
+// Synchronous
+// Send Push Data to Global Channel
+// returns (boolean)succeeded, (integer or null)errorCode, (string or null)error
+var result = parseapi.ParseAndroidPushSendPushDataToChannel( {
+
+                                        channel: "", // global channel
+                                        data: myData
+                                                            });
+
+if( result.succeeded ) {
+
+    alert("Successfully sent Push Notification message.");
+
+} else {
+
+    alert("Could not send Push Notification message. ErrorCode: " + result.errorCode + " Error: " + result.error);
+}
+</code></pre>
+<p><strong>IMPORTANT:</strong> By default, if you send a push notification with android, iOS users cannot see it by default. This is explained in the Parse Docs in the ParsePush section. If you wish to send a push notification to iOS users you can set the <code>pushToIOS</code> argument to true every time you send a message or data. <strong>Before using this, you must set up iOS push certificates!</strong></p>
+<pre><code>parseapi.ParseAndroidPushSendPushMessageToChannel( {
+    channel: "", // global channel
+    message: "Android Client Sent Everyone this Message!",
+    pushToIOS: true 
+});
+</code></pre>
+<p>or
+    parseapi.ParseAndroidPushSendPushDataToChannel( {
+        channel: "", // global channel
+        data: myData,
+        pushToIOS: true
+    });</p>
+<hr />
+<hr />
+<h2 id="handling-errors">Handling Errors</h2>
+<p>In all the examples above, if a function fails, it returns an <code>errorCode</code> and an <code>error</code> string. You can check the error code by comparing it against the error codes listed in the Error Code Properties of the <a href="./parsemodulereference.html">Parse Module Reference</a> page of this documentation.</p>
+<p>Example:</p>
+<pre><code>//Asynchronous User Login
+parseapi.PFUserLoginInBackground( {
+
+                username: user,
+                password: pass,
+
+                success: function(e) {
+
+                },
+                error: function(e) {
+
+                    // An error occured
+
+                    // Used the wrong credentials to login a user
+                    if( e.errorCode == parseapi.kParseErrorUserWrongCredentials )
+                    {
+                        Ti.API.info("Please try to login again! Error: " + e.error);
+                    }
+
+                }
+
+});
+</code></pre>
+<hr />
+<h3 id="showing-debug-info">Showing Debug Info</h3>
+<p><strong>Important:</strong> All debugging info is turned off by default</p>
+<p>You can call the <code>parseapi.enableParseModuleDebugLog( boolean )</code> function to show more debugging information from the Parse API Module. You can test this for yourself in the examples. All messages from this will be prefixed with <code>[PARSE MODULE]</code>.</p>
+<p>The exact error message sent back from the Parse Servers will be prefixed with: <code>[Extra Error Information From Parse Server]</code>.</p>
+<hr />
+<hr />
+<h2 id="release-notes">Release Notes</h2>
+<p><a href="./releasenotes.html">Click here to see version and release notes</a></p>
+<hr />
+<hr />
+<h2 id="author">Author</h2>
+<p>Programmer: David E. Rodriguez</p>
+<p>Company: Forge42</p>
+<p>Website: www.forge42.com</p>
+<p>Twitter: @programmerdave</p>
+<hr />
+<hr />
+<h2 id="feedback-and-support">Feedback and Support</h2>
+<p>If you find any bugs, please let me know.</p>
+<p>Also when reporting a bug or problem, please send me your iOS <code>build.log</code> file in your e-mail if using the iOS version of the module.</p>
+<p>Please direct questions, feedback, and concerns about this module to <a href="support@forge42.com">support@forge42.com</a></p>
+<p>Please include <strong>Parse API Module iOS Support</strong><br />
+or <strong>Parse API Module Android Support</strong> in the subject line.</p>
+<p>I will get back to you in a timely manner.</p>
+<p>Please if you want a new feature in Parse, Tell them! The more requests they get, the faster they implement certain features. Send them an email at <a href="feedback@parse.com">feedback@parse.com</a></p>
+<hr />
+<hr />
+<h2 id="license">License</h2>
+<p>IMPORTANT: This module is unofficial and is not maintained by parse.com</p>
+<p>Copyright(c) 2011 by Forge42. </p>
+<p>Please see the LICENSE file included in the distribution for further details.</p>
+
+</body>
+</html>
